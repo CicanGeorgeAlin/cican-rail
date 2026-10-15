@@ -1,0 +1,4 @@
+name = "cican-rail-api"
+main = "irish-rail-proxy.js"
+compatibility_date = "2026-10-15"
+workers_dev = true
