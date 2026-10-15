@@ -23,6 +23,15 @@ class RailAppSmokeTests(unittest.TestCase):
         self.assertNotIn("Your local network", HTML)
         self.assertNotIn("Trackline", HTML)
 
+    def test_free_by_design_roadmap_and_optional_donation_are_visible(self):
+        self.assertIn("Powerful features. Free by design.", HTML)
+        self.assertIn("Available in prototype", HTML)
+        self.assertIn("In development", HTML)
+        self.assertIn("Planned free essentials", HTML)
+        self.assertIn('href="https://buymeacoffee.com/cican"', HTML)
+        self.assertIn("No feature is unlocked by donating.", HTML)
+        self.assertIn("FREE CORE TOOLS", HTML)
+
     def test_station_search_and_results_exist(self):
         self.assertIn('id="stationSearch"', HTML)
         self.assertIn('id="stationResults"', HTML)
