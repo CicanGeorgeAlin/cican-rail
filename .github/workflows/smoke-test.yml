@@ -1,0 +1,37 @@
+name: CICAN RAIL smoke tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Run website smoke tests
+        run: python -m unittest discover -s tests -v
+      - name: Check inline JavaScript syntax
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          html = Path("index.html").read_text(encoding="utf-8")
+          scripts = re.findall(r"<script>([\s\S]*?)</script>", html)
+          if not scripts:
+              raise SystemExit("No inline script found")
+          Path("/tmp/cican-rail-inline.js").write_text("\n".join(scripts), encoding="utf-8")
+          PY
+          node --check /tmp/cican-rail-inline.js
