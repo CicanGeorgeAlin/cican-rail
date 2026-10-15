@@ -143,7 +143,7 @@ class RailAppSmokeTests(unittest.TestCase):
                 self.assertIn(f'data-target="{target}"', HTML)
 
     def test_every_anchor_destination_is_expected_and_donation_opens_safely(self):
-        anchors = re.findall(r'<a\\b([^>]*)href=["\\']([^"\\']+)["\\']([^>]*)>', HTML, flags=re.IGNORECASE)
+        anchors = re.findall(r"<a\b([^>]*)href=['\"]([^'\"]+)['\"]([^>]*)>", HTML, flags=re.IGNORECASE)
         self.assertGreaterEqual(len(anchors), 3)
         destinations = [item[1] for item in anchors]
         self.assertIn("./", destinations)
