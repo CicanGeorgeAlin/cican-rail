@@ -43,6 +43,11 @@ class RailAppSmokeTests(unittest.TestCase):
         self.assertIn("Choose a station from the suggestions.", HTML)
         self.assertIn("Choose two different stations.", HTML)
         self.assertIn("https://www.google.com/maps/dir/?api=1", HTML)
+        self.assertIn('id="journeyResults"', HTML)
+        self.assertIn("Optional: view full route in Google Maps", HTML)
+        self.assertIn("loadDepartures(from,journeyResults)", HTML)
+        self.assertIn("not yet a complete station-to-station timetable", HTML)
+        self.assertNotIn('window.open(url,"_blank","noopener,noreferrer")', HTML)
         self.assertIn('data-route="Connolly|Howth"', HTML)
 
     def test_favourites_are_local_and_migrate_old_storage(self):
