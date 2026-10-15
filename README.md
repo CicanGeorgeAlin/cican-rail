@@ -27,7 +27,7 @@ CICAN RAIL aims to keep essential passenger features free: station search, saved
 ## First milestones
 1. Verify live departures from a real mobile browser and document API/CORS behaviour.
 2. Register for NTA developer resources and obtain a private API key for GTFS-Realtime where required.
-3. Validate the static GTFS schedule feed, licence, attribution, coverage and update cadence.
+3. Download and validate the static GTFS schedule feed; record its hash, retrieval timestamp, coverage and attribution.
 4. Build a native route engine from verified schedule data, with transfers and service calendars handled correctly.
 5. Combine scheduled times with live estimates and service alerts; mark stale or unavailable data.
 6. Test all external links and keep essential station/departure information inside CICAN RAIL wherever data rights and reliability permit.
@@ -45,26 +45,38 @@ CICAN RAIL aims to keep essential passenger features free: station search, saved
 - Test each feature and deployed change before calling it complete.
 
 ## Links
-- Website (after GitHub Pages is enabled): https://cicangeorgealin.github.io/cican-rail/
+- Website: https://cicangeorgealin.github.io/cican-rail/
 - Repository: https://github.com/CicanGeorgeAlin/cican-rail
 - Support: https://buymeacoffee.com/cican
-- Data source register: [DATA_SOURCES.md](DATA_SOURCES.md)
+- Data source register: DATA_SOURCES.md
 
 ## Independence
 CICAN RAIL is not affiliated with or endorsed by Iarnród Éireann, the National Transport Authority, Google or any other transport operator. Names are used only to identify relevant services and sources.
 
-## GTFS schedule validation tool
+## GTFS schedule acquisition and validation
 
-Before using a downloaded NTA GTFS Schedule ZIP for route calculations, run the structural validator:
+The reproducible downloader retrieves the public NTA static GTFS ZIP, validates it before replacing the local output, and writes a JSON manifest with the source URL, retrieval time, SHA-256, basic row counts and validation warnings:
+
+```bash
+python scripts/download_gtfs.py
+```
+
+By default, the ZIP and manifest are written under `build/`, which is ignored by Git so the large, frequently changing feed is not committed to the website repository. You can choose another approved URL or output path:
+
+```bash
+python scripts/download_gtfs.py --url https://www.transportforireland.ie/transitData/Data/GTFS_All.zip --output build/GTFS_All.zip
+```
+
+To validate a ZIP already downloaded, without downloading it again:
 
 ```bash
 python scripts/validate_gtfs.py /path/to/GTFS_All.zip
 ```
 
-The validator checks for core schedule files, required columns, and references between routes, trips, stops, stop times and service calendars. It reports errors and a summary of rail-route coverage. The test suite includes a small synthetic feed:
+Run the local automated suite:
 
 ```bash
 python -m unittest discover -s tests -p "*_test.py" -v
 ```
 
-**Important:** passing structural checks does not prove that a feed is current, contains all Irish Rail services, is matched to a particular GTFS-Realtime version, or is ready for production. Verify the feed date, rail coverage, licence, attribution and update process before implementing journey calculations. The validator does not download any data or contain API credentials.
+**Important:** passing structural checks does not prove that a feed is current, contains all Irish Rail services, is matched to a particular GTFS-Realtime version, or is ready for production. Verify feed date, rail coverage, licence, attribution and update process before implementing journey calculations. The downloader does not contain API credentials, and the downloaded ZIP is not automatically published to the website.
