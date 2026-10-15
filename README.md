@@ -9,11 +9,13 @@ CICAN RAIL is an independent, free-first railway information project starting wi
 - Search the initial DART corridor station directory.
 - Save/remove favourite stations using browser local storage; no account required.
 - Visible, optional Buy Me a Coffee support link; donations unlock no features.
-- Free-by-design feature roadmap that distinguishes prototype features from planned work.
-- Official Irish Rail station directory and an in-app request for station departure data (live browser/API access still requires real-device verification).
+- Official Irish Rail station directory and in-app departure requests. Browser-to-API access still needs a deployed proxy and real-device verification.
 - Journey form stays in CICAN RAIL, but currently checks departures from the starting station only; complete station-to-station routing and transfers are not implemented.
 - Departure errors and empty results stay in the app with a retry action; there are no operator-site redirects in the passenger flow.
 - Saved stations remain on the device; no account required.
+
+## Live Irish Rail API: current priority
+The official Irish Rail real-time XML API is already the data source used by the app. The website currently calls it directly from the browser, which can fail under cross-origin/browser network restrictions. A narrow Cloudflare Worker proxy scaffold is now in `worker/`; the app can be configured to use it through `api-config.js`. **The Worker still must be deployed and its URL configured before proxy-backed live data can be considered active.** Follow `worker/README.md`. Do not describe the proxy as live until the deployed endpoint and the website have both been tested.
 
 ## Not implemented yet
 A complete native station-to-station timetable/route engine, verified browser access to live departures, NTA GTFS-Realtime integration, vehicle positions, service alerts, walking directions, notifications, offline timetables, ticketing and Android distribution.
@@ -26,7 +28,7 @@ We will study public feature descriptions, user needs and publicly available rev
 CICAN RAIL aims to keep essential passenger features free: station search, saved stations/journeys, journey planning, departures and core service information. Planned convenience features such as alerts, offline access and richer journey tools are not presented as complete until implemented and tested. Optional donations at https://buymeacoffee.com/cican support development; they do not unlock features. We build original functionality and respect third-party data licences and terms rather than copying competitors’ proprietary code or bypassing paid services.
 
 ## First milestones
-1. Verify live departures from a real mobile browser and document API/CORS behaviour.
+1. Deploy the narrow Irish Rail API proxy, configure `api-config.js`, and verify station directory and departures on a real mobile browser.
 2. Register for NTA developer resources and obtain a private API key for GTFS-Realtime where required.
 3. Download and validate the static GTFS schedule feed; record its hash, retrieval timestamp, coverage and attribution.
 4. Build a native route engine from verified schedule data, with transfers and service calendars handled correctly.
