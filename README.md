@@ -9,21 +9,23 @@ CICAN RAIL is an independent, free-first railway information project starting wi
 - Search the initial DART corridor station directory.
 - Save/remove favourite stations using browser local storage; no account required.
 - Buy Me a Coffee support link.
-- Clear disclosure that live departures and disruption alerts are not connected yet.
+- Official Irish Rail station directory and an in-app request for station departure data (live browser/API access still requires real-device verification).
+- Journey search now stays in CICAN RAIL: it displays departures for the starting station when the official feed responds, and offers Google Maps as an optional external route fallback.
+- Saved stations remain on the device; no account required.
 
 ## Not implemented yet
-Verified live departures, vehicle positions, service alerts, GPS/nearest station, walking directions, journey routing, notifications, offline timetables, ticketing and Android distribution.
+A complete native station-to-station timetable/route engine, verified browser access to live departures, NTA GTFS-Realtime integration, vehicle positions, service alerts, walking directions, notifications, offline timetables, ticketing and Android distribution.
 
 ## Product principle: premium-style features free
 We will study public feature descriptions, user needs and publicly available reviews, then build original features using authorised data and open standards. We will not copy proprietary code, bypass paywalls, or misuse private APIs. Essential passenger information and planned premium-style convenience features should remain free wherever feasible.
 
 ## First milestones
-1. Validate the initial station list against official data.
-2. Register for NTA developer resources and document API access rules.
-3. Verify available static and real-time feeds, licence, attribution, coverage, update cadence and request limits.
-4. Build a data adapter that separates scheduled times from live estimates and marks stale/unavailable data.
-5. Add a departure board and disruption notices; test against official information.
-6. Add optional location, walking directions, saved journeys and reminders.
+1. Verify live departures from a real mobile browser and document API/CORS behaviour.
+2. Register for NTA developer resources and obtain a private API key for GTFS-Realtime where required.
+3. Validate the static GTFS schedule feed, licence, attribution, coverage and update cadence.
+4. Build a native route engine from verified schedule data, with transfers and service calendars handled correctly.
+5. Combine scheduled times with live estimates and service alerts; mark stale or unavailable data.
+6. Test all external links and keep essential station/departure information inside CICAN RAIL wherever data rights and reliability permit.
 7. Expand verified coverage to the wider Irish passenger railway network.
 8. Evaluate Android packaging and publication.
 
