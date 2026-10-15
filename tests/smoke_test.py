@@ -41,7 +41,7 @@ class RailAppSmokeTests(unittest.TestCase):
         self.assertIn("not affiliated with or endorsed by", HTML)
 
     def test_forbidden_project_word_is_absent(self):
-        self.assertIsNone(re.search(r"\\bblink\\b", HTML, flags=re.IGNORECASE))
+        self.assertIsNone(re.search(r"\bblink\b", HTML, flags=re.IGNORECASE))
 
     def test_required_dart_stations_exist(self):
         for station in ("Connolly", "Pearse", "Dún Laoghaire", "Howth", "Bray"):
