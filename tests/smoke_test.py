@@ -47,16 +47,16 @@ class RailAppSmokeTests(unittest.TestCase):
         self.assertIn("navigator.geolocation.getCurrentPosition", HTML)
         self.assertIn("Your location stays on this device", HTML)
 
-    def test_route_planner_validates_stations_and_opens_transit_directions(self):
+    def test_route_planner_validates_stations_without_external_redirect(self):
         self.assertIn('id="journeyForm"', HTML)
         self.assertIn('id="fromStation"', HTML)
         self.assertIn('id="toStation"', HTML)
         self.assertIn('id="plannerMessage"', HTML)
         self.assertIn("Choose a station from the suggestions.", HTML)
         self.assertIn("Choose two different stations.", HTML)
-        self.assertIn("https://www.google.com/maps/dir/?api=1", HTML)
+        self.assertNotIn("https://www.google.com/maps/dir/?api=1", HTML)
         self.assertIn('id="journeyResults"', HTML)
-        self.assertIn("Optional: view full route in Google Maps", HTML)
+        self.assertNotIn("view full route in Google Maps", HTML)
         self.assertIn("loadDepartures(from,journeyResults)", HTML)
         self.assertIn("not yet a complete station-to-station timetable", HTML)
         self.assertNotIn('window.open(url,"_blank","noopener,noreferrer")', HTML)
