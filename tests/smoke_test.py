@@ -10,15 +10,18 @@ class RailAppSmokeTests(unittest.TestCase):
     def test_document_has_mobile_viewport_and_cican_rail_brand(self):
         self.assertIn('<meta name="viewport"', HTML)
         self.assertIn("<title>CICAN RAIL", HTML)
-        self.assertIn('name="theme-color" content="#f5f6fa"', HTML)
+        self.assertIn('name="theme-color" content="#f5f8f5"', HTML)
         self.assertIn('id="home"', HTML)
 
     def test_minimal_homepage_and_free_core_tools(self):
         self.assertIn("Your next train,", HTML)
+        self.assertIn("--teal:#00843d", HTML)
+        self.assertIn("--lime:#f4d35e", HTML)
         self.assertIn("FREE · IRELAND", HTML)
         self.assertIn("Free core tools", HTML)
         self.assertNotIn("A calmer way to commute", HTML)
         self.assertNotIn("Your local network", HTML)
+        self.assertNotIn("Trackline", HTML)
 
     def test_station_search_and_results_exist(self):
         self.assertIn('id="stationSearch"', HTML)
@@ -26,6 +29,11 @@ class RailAppSmokeTests(unittest.TestCase):
         self.assertIn("function renderStations()", HTML)
         self.assertIn("function loadStationDirectory()", HTML)
         self.assertIn("getAllStationsXML", HTML)
+        self.assertIn("StationLatitude", HTML)
+        self.assertIn("StationLongitude", HTML)
+        self.assertIn('id="nearMe"', HTML)
+        self.assertIn("navigator.geolocation.getCurrentPosition", HTML)
+        self.assertIn("Your location stays on this device", HTML)
 
     def test_route_planner_validates_stations_and_opens_transit_directions(self):
         self.assertIn('id="journeyForm"', HTML)
