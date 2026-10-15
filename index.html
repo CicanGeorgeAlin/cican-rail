@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#f5f7f2">
+<meta name="theme-color" content="#f5f6fa">
 <meta name="description" content="A simple, app-style companion for Dublin DART and Irish rail journeys, station search, saved stops and departure information.">
 <meta name="author" content="George Alin Cican">
 <meta property="og:type" content="website">
@@ -154,7 +154,7 @@ const storageKey="cicanrail.favourites.v1";
 const search=document.getElementById("stationSearch"),results=document.getElementById("stationResults"),favorites=document.getElementById("favorites"),count=document.getElementById("stationCount"),allFilter=document.getElementById("allFilter"),savedFilter=document.getElementById("savedFilter");
 let showSaved=false;
 const trainIcon='<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="2.8" width="14" height="16" rx="4" stroke="currentColor" stroke-width="1.7"/><path d="M8 7h8M8 11h8M8 19l-2 2m10-2 2 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="8.5" cy="15" r="1" fill="currentColor"/><circle cx="15.5" cy="15" r="1" fill="currentColor"/></svg>';
-function getSaved(){try{const value=JSON.parse(localStorage.getItem(storageKey)||"[]");return Array.isArray(value)?value.filter(x=>stations.includes(x)):[]}catch{return []}}
+function getSaved(){try{let raw=localStorage.getItem(storageKey);if(raw===null){raw=localStorage.getItem("trackline.favourites.v1");if(raw!==null)localStorage.setItem(storageKey,raw)}const value=JSON.parse(raw||"[]");return Array.isArray(value)?value.filter(x=>stations.includes(x)):[]}catch{return []}}
 function setSaved(value){try{localStorage.setItem(storageKey,JSON.stringify(value))}catch{}}
 function toggleSaved(name){const saved=getSaved();setSaved(saved.includes(name)?saved.filter(x=>x!==name):saved.concat(name));renderStations();renderFavorites()}
 function makeEmpty(message){const p=document.createElement("p");p.className="empty";p.textContent=message;return p}
