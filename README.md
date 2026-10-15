@@ -8,7 +8,8 @@ CICAN RAIL is an independent, free-first railway information project starting wi
 - Responsive static website.
 - Search the initial DART corridor station directory.
 - Save/remove favourite stations using browser local storage; no account required.
-- Buy Me a Coffee support link.
+- Visible, optional Buy Me a Coffee support link; donations unlock no features.
+- Free-by-design feature roadmap that distinguishes prototype features from planned work.
 - Official Irish Rail station directory and an in-app request for station departure data (live browser/API access still requires real-device verification).
 - Journey search now stays in CICAN RAIL: it displays departures for the starting station when the official feed responds, and offers Google Maps as an optional external route fallback.
 - Saved stations remain on the device; no account required.
@@ -18,6 +19,10 @@ A complete native station-to-station timetable/route engine, verified browser ac
 
 ## Product principle: premium-style features free
 We will study public feature descriptions, user needs and publicly available reviews, then build original features using authorised data and open standards. We will not copy proprietary code, bypass paywalls, or misuse private APIs. Essential passenger information and planned premium-style convenience features should remain free wherever feasible.
+
+## Free-by-design promise
+
+CICAN RAIL aims to keep essential passenger features free: station search, saved stations/journeys, journey planning, departures and core service information. Planned convenience features such as alerts, offline access and richer journey tools are not presented as complete until implemented and tested. Optional donations at https://buymeacoffee.com/cican support development; they do not unlock features. We build original functionality and respect third-party data licences and terms rather than copying competitors’ proprietary code or bypassing paid services.
 
 ## First milestones
 1. Verify live departures from a real mobile browser and document API/CORS behaviour.
