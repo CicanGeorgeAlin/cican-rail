@@ -61,6 +61,8 @@ class RailAppSmokeTests(unittest.TestCase):
         self.assertIn("function loadDepartures(stationName,card)", HTML)
         self.assertIn("api.irishrail.ie/realtime/realtime.asmx", HTML)
         self.assertIn("No times have been invented", HTML)
+        self.assertIn('retry.textContent="Try again"', HTML)
+        self.assertIn('retry.addEventListener("click",()=>{panel.remove();loadDepartures(stationName,card)})', HTML)
         self.assertIn("Duein", HTML)
         self.assertIn("Estimated and scheduled times are not guarantees", HTML)
 
