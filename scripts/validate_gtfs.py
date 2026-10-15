@@ -68,7 +68,8 @@ def validate_gtfs(path: str | Path) -> FeedReport:
         return FeedReport(files, errors, warnings)
 
     for name in REQUIRED_COLUMNS:
-        if not files[name]:
+        # calendar_dates.txt may contain only headers when there are no exceptions.
+        if not files[name] and name != "calendar_dates.txt":
             errors.append(f"{name} contains no data rows")
 
     routes = files["routes.txt"]
