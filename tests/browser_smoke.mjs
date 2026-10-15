@@ -16,6 +16,7 @@ try {
     geolocation: { latitude: 53.3498, longitude: -6.2603 }
   });
   const page = await context.newPage();
+  page.setDefaultTimeout(8000);
   const names = [
     "Connolly", "Howth", "Pearse", "Bray", "Dún Laoghaire", "Malahide",
     "Blackrock", "Greystones", "Drogheda", "Cork", "Galway", "Limerick"
@@ -77,7 +78,7 @@ try {
   await page.getByRole("button", { name: "Check departures for Pearse" }).click();
   await page.getByText("Irish Rail information · Pearse").waitFor();
   await page.getByRole("button", { name: "Clear station search" }).click();
-  await page.getByRole("button", { name: "Saved", exact: true }).last().click();
+  await page.locator('.nav-item[data-target="savedSection"]').click();
   await page.getByRole("button", { name: "Find", exact: true }).first().click();
   await page.getByRole("button", { name: "Remove Connolly" }).click();
 
@@ -96,13 +97,13 @@ try {
   }
 
   // Every bottom-navigation destination must remain reachable.
-  for (const [name, heading] of [
-    ["Home", "Your next train,"],
-    ["Journey", "Plan a journey"],
-    ["Stations", "Find a station"],
-    ["Saved", "Saved"]
+  for (const [target, heading] of [
+    ["home", "Your next train,"],
+    ["journeySection", "Plan a journey"],
+    ["stationsSection", "Find a station"],
+    ["savedSection", "Saved"]
   ]) {
-    await page.getByRole("button", { name, exact: true }).last().click();
+    await page.locator(`.nav-item[data-target="${target}"]`).click();
     await page.getByRole("heading", { name: new RegExp(heading) }).waitFor();
   }
 
