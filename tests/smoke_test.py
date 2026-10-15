@@ -110,6 +110,51 @@ class RailAppSmokeTests(unittest.TestCase):
         self.assertNotIn('class="official-link"', HTML)
         self.assertIn('href="https://buymeacoffee.com/cican"', HTML)
 
+    def test_optional_api_proxy_is_configurable_and_used_by_both_live_feeds(self):
+        self.assertIn('<script src="./api-config.js"></script>', HTML)
+        self.assertIn('window.CICAN_RAIL_API_BASE = ""', (ROOT / "api-config.js").read_text(encoding="utf-8"))
+        self.assertIn('window.CICAN_RAIL_API_BASE||"https://api.irishrail.ie/realtime/realtime.asmx"', HTML)
+        self.assertIn('IRISH_RAIL_API_BASE+"/getStationDataByNameXML?StationDesc="', HTML)
+        self.assertIn('fetch(IRISH_RAIL_API_BASE+"/getAllStationsXML"', HTML)
+
+    def test_primary_buttons_and_navigation_have_handlers(self):
+        required_handlers = [
+            'document.getElementById("heroNearMe").addEventListener("click"',
+            'document.getElementById("heroDepartures").addEventListener("click"',
+            'document.getElementById("heroJourney").addEventListener("click"',
+            'document.getElementById("swapStations").addEventListener("click"',
+            'document.getElementById("clearSearch").addEventListener("click"',
+            'document.getElementById("nearMe").addEventListener("click"',
+            'allFilter.addEventListener("click"',
+            'savedFilter.addEventListener("click"',
+            'document.querySelectorAll("[data-route]").forEach(button=>button.addEventListener("click"',
+            'document.querySelectorAll(".nav-item").forEach(button=>button.addEventListener("click"',
+            'departures.addEventListener("click",()=>loadDepartures(name,card))',
+            'save.addEventListener("click",()=>toggleSaved(name))',
+            'open.addEventListener("click",()=>{showSaved=false;search.value=name',
+            'remove.addEventListener("click",()=>toggleSaved(name))',
+        ]
+        for handler in required_handlers:
+            with self.subTest(handler=handler):
+                self.assertIn(handler, HTML)
+        for target in ("home", "journeySection", "stationsSection", "savedSection"):
+            with self.subTest(target=target):
+                self.assertIn(f'id="{target}"', HTML)
+                self.assertIn(f'data-target="{target}"', HTML)
+
+    def test_every_anchor_destination_is_expected_and_donation_opens_safely(self):
+        anchors = re.findall(r'<a\\b([^>]*)href=["\\']([^"\\']+)["\\']([^>]*)>', HTML, flags=re.IGNORECASE)
+        self.assertGreaterEqual(len(anchors), 3)
+        destinations = [item[1] for item in anchors]
+        self.assertIn("./", destinations)
+        self.assertEqual(destinations.count("https://buymeacoffee.com/cican"), 2)
+        self.assertTrue(all(href in ("./", "https://buymeacoffee.com/cican") for href in destinations))
+        for before, href, after in anchors:
+            if href.startswith("https://"):
+                attrs = before + after
+                self.assertIn('target="_blank"', attrs)
+                self.assertIn('rel="noopener noreferrer"', attrs)
+
     def test_forbidden_project_word_is_absent(self):
         self.assertIsNone(re.search(r"\bblink\b", HTML, flags=re.IGNORECASE))
 
