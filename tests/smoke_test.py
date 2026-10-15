@@ -25,7 +25,7 @@ class CicanRailSmokeTests(unittest.TestCase):
         self.assertIn("function loadDepartures(stationName,card)", HTML)
         self.assertIn("api.irishrail.ie/realtime/realtime.asmx", HTML)
         self.assertIn("No times have been invented", HTML)
-        self.assertIn("Live information", HTML)
+        self.assertIn("Live departures are experimental.", HTML)
 
     def test_support_link_and_project_disclosure_exist(self):
         self.assertIn("https://buymeacoffee.com/cican", HTML)
