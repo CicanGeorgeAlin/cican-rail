@@ -50,6 +50,9 @@ class RailAppSmokeTests(unittest.TestCase):
         self.assertIn('id="nearMe"', HTML)
         self.assertIn("navigator.geolocation.getCurrentPosition", HTML)
         self.assertIn("Your location stays on this device", HTML)
+        self.assertIn("Nearby stations are unavailable because station coordinates could not be loaded.", HTML)
+        self.assertIn('stationDirectoryStatus="loading"', HTML)
+        self.assertIn('stationDirectoryStatus="fallback"', HTML)
 
     def test_route_planner_validates_stations_without_external_redirect(self):
         self.assertIn('id="journeyForm"', HTML)
@@ -98,8 +101,8 @@ class RailAppSmokeTests(unittest.TestCase):
         self.assertIn(".finally(()=>clearTimeout(timeout))", HTML)
 
     def test_official_operator_links_and_independence_disclosure_exist(self):
-        self.assertIn("https://www.irishrail.ie/", HTML)
-        self.assertIn("https://www.transportforireland.ie/available-apps/tfi-live/", HTML)
+        self.assertNotIn('href="https://www.irishrail.ie/"', HTML)
+        self.assertNotIn('href="https://www.transportforireland.ie/available-apps/tfi-live/"', HTML)
         self.assertIn("Independent project", HTML)
         self.assertNotIn("Open official Irish Rail information ↗", HTML)
         self.assertNotIn('class="official-link"', HTML)
