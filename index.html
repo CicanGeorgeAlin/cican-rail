@@ -197,7 +197,7 @@ function loadDepartures(stationName,card){
  const old=card.querySelector(".departure-panel");if(old){clearTimeout(old.refreshTimer);old.remove();return}
  const panel=document.createElement("div");panel.className="departure-panel";panel.setAttribute("aria-live","polite");panel.textContent="Checking the official Irish Rail real-time service…";card.append(panel);
  panel.refreshTimer=setTimeout(()=>{if(!panel.isConnected)return;clearTimeout(panel.refreshTimer);panel.remove();loadDepartures(stationName,card)},30000);
- const url=IRISH_RAIL_API_BASE+"/getStationDataByNameXML?StationDesc="+encodeURIComponent(stationName)+"&NumMins=90";
+ const url=IRISH_RAIL_API_BASE+"/getStationDataByNameXML_withNumMins?StationDesc="+encodeURIComponent(stationName)+"&NumMins=90";
  const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),9000);
  fetch(url,{signal:controller.signal,headers:{Accept:"application/xml, text/xml"}}).then(async response=>{
   if(!response.ok)throw new Error("Service returned "+response.status);
