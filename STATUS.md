@@ -16,13 +16,15 @@ This is a source-code and automated-test audit, not a claim that every live data
 - Validate station names before the planner form accepts a route.
 - Offer an optional Google Maps transit route link; the website does not silently redirect users.
 - Voluntary Buy Me a Coffee support link. Donations do not unlock features.
-- Automated Python smoke tests and inline JavaScript syntax checks run in GitHub Actions.
+- Reproducible NTA GTFS download-and-validate script that records a local manifest only after structural checks pass.
+- Automated Python tests and inline JavaScript syntax checks run in GitHub Actions.
 
 ## Present but dependent on external conditions
 
 - Full station directory: depends on the official endpoint responding with parseable XML. The bundled list remains as a fallback.
 - Nearby station results: require valid coordinates from the station feed; location permission is optional.
 - Departure times: depend on browser network access, API availability, response shape and cross-origin policy. Automated static tests do not establish that this works in every browser or on every device.
+- GTFS download: depends on the official download endpoint and structural validation. The manifest records retrieval time and hash, but does not independently prove freshness or complete railway coverage.
 - The displayed departure rows are a feed view, not a proof that each train reaches the user's selected destination.
 
 ## Not yet implemented / not verified
@@ -31,7 +33,7 @@ This is a source-code and automated-test audit, not a claim that every live data
 - Correct transfer search, interchange/walking times, service calendars and journey ranking.
 - Production-verified live departures, delay handling, cancellations, disruption alerts and data freshness monitoring.
 - NTA GTFS-Realtime integration with a registered key and the correct schema/version.
-- Reliable nationwide route coverage from a current, validated static GTFS feed.
+- Real-world verification of the current static GTFS feed's DART/Irish Rail coverage and attribution.
 - Push notifications, saved journeys, timetable offline mode, live vehicle positions and accessibility data.
 - A dedicated installable Android app or Play Store release.
 - Real-device/browser checks for geolocation, API CORS, visual layout, keyboard/screen-reader use and actual outbound links.
@@ -44,8 +46,8 @@ The target is to provide passenger essentials without a subscription: station se
 
 1. Keep the automated test suite green.
 2. Verify the official station feed and departures from a real mobile browser, recording the actual outcome.
-3. Obtain and validate a current NTA static GTFS feed and document feed date, coverage and attribution.
-4. Implement a tested route engine against real schedule data before replacing the current honest planner explanation.
+3. Download a current NTA static GTFS feed using `python scripts/download_gtfs.py`; review the manifest and verify DART/Irish Rail coverage, licence and attribution.
+4. Implement and test a route engine against real schedule data before replacing the current honest planner explanation.
 5. Integrate real-time data only after authentication, schema/version, rate limits, cache policy and secret handling are confirmed.
 6. Add each extra free feature only when its data source and failure states are reliable.
 
@@ -54,6 +56,7 @@ The target is to provide passenger essentials without a subscription: station se
 - Website: https://cicangeorgealin.github.io/cican-rail/
 - Source repository: https://github.com/CicanGeorgeAlin/cican-rail
 - Automated tests: https://github.com/CicanGeorgeAlin/cican-rail/actions
+- NTA GTFS Schedule: https://developer.nationaltransport.ie/GTFS
 - NTA developer portal: https://developer.nationaltransport.ie/
 - Official Irish Rail: https://www.irishrail.ie/
 - Optional support: https://buymeacoffee.com/cican
