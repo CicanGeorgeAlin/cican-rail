@@ -177,8 +177,8 @@ function loadDepartures(stationName,card){
  const old=card.querySelector(".departure-panel");if(old){old.remove();return}
  const panel=document.createElement("div");panel.className="departure-panel";panel.setAttribute("aria-live","polite");panel.textContent="Checking the official Irish Rail real-time service…";card.append(panel);
  const url="https://api.irishrail.ie/realtime/realtime.asmx/getStationDataByNameXML?StationDesc="+encodeURIComponent(stationName)+"&NumMins=90";
- const timeout=new Promise((_,reject)=>setTimeout(()=>reject(new Error("Request timed out")),9000));
- Promise.race([fetch(url,{headers:{Accept:"application/xml, text/xml"}}),timeout]).then(async response=>{
+ const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),9000);
+ fetch(url,{signal:controller.signal,headers:{Accept:"application/xml, text/xml"}}).then(async response=>{
   if(!response.ok)throw new Error("Service returned "+response.status);
   const xmlText=await response.text(),xml=new DOMParser().parseFromString(xmlText,"application/xml");if(xml.querySelector("parsererror"))throw new Error("Could not read response");
   const nodes=Array.from(xml.getElementsByTagNameNS("*","objStationData"));if(!nodes.length)throw new Error("No departure records returned");
@@ -192,7 +192,7 @@ function loadDepartures(stationName,card){
    const time=document.createElement("div");time.style.cssText="color:var(--teal-dark);font-weight:900";time.textContent=live||plan||(due!==""&&Number.isFinite(Number(due))?"In "+due+" min":"Time unavailable");const sub=document.createElement("div");sub.style.cssText="font-size:9px;color:var(--muted)";sub.textContent=live?"Expected":plan?"Scheduled":(late!==""&&Number.isFinite(Number(late))&&Number(late)>0?late+" min late":"Live estimate");right.append(time,sub);line.append(left,right);panel.append(line);
   });
   const foot=document.createElement("div");foot.style.cssText="font-size:9px;margin-top:8px";foot.textContent="Source: Irish Rail. Estimated and scheduled times are not guarantees.";panel.append(foot);
- }).catch(()=>{if(!panel.isConnected)return;panel.replaceChildren();const message=document.createElement("p");message.textContent="Live data could not be loaded in this browser. No times have been invented.";panel.append(message);const link=document.createElement("a");link.href="https://www.irishrail.ie/";link.target="_blank";link.rel="noopener noreferrer";link.textContent="Open official Irish Rail information ↗";link.style.cssText="display:inline-block;margin-top:8px;color:var(--teal-dark);font-weight:850";panel.append(link)});
+ }).catch(()=>{if(!panel.isConnected)return;panel.replaceChildren();const message=document.createElement("p");message.textContent="Live data could not be loaded in this browser. No times have been invented.";panel.append(message);const link=document.createElement("a");link.href="https://www.irishrail.ie/";link.target="_blank";link.rel="noopener noreferrer";link.textContent="Open official Irish Rail information ↗";link.style.cssText="display:inline-block;margin-top:8px;color:var(--teal-dark);font-weight:850";panel.append(link)}).finally(()=>clearTimeout(timeout));
 }
 function renderFavorites(){
  const saved=getSaved();favorites.replaceChildren();
