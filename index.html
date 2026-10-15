@@ -34,7 +34,7 @@
 <div class="results" id="stationResults" aria-live="polite"></div>
 </div>
 <div class="card"><h3>Your saved stations</h3><p class="sub">Saved only on this device. No account required.</p><div class="favorites" id="favorites"></div>
-<div class="livebox"><strong>Live departures are next</strong><p>We are preparing the official transport-data connection. Until it is verified, use the official Irish Rail journey information for operational times.</p><p style="margin-top:9px"><a href="https://www.irishrail.ie/" target="_blank" rel="noopener noreferrer">Open Irish Rail ↗</a></p></div>
+<div class="livebox"><strong>Live departure lookup · experimental</strong><p>Try the official Irish Rail real-time service for a station. Browser access can vary; if the feed cannot be reached, we will direct you to the official source instead of showing made-up results.</p><p style="margin-top:9px"><a href="https://api.irishrail.ie/realtime/realtime.asmx" target="_blank" rel="noopener noreferrer">Irish Rail real-time service ↗</a> · <a href="https://www.irishrail.ie/" target="_blank" rel="noopener noreferrer">Irish Rail website ↗</a></p></div>
 </div>
 </div>
 </section>
@@ -42,7 +42,7 @@
 <div class="featuregrid">
 <article class="feature"><div class="icon">⌕</div><h3>Quick station search</h3><p>Find stations fast, without navigating through layers of menus.</p></article>
 <article class="feature"><div class="icon">♡</div><h3>Saved favourites</h3><p>Keep your regular stations one tap away, with no account needed.</p></article>
-<article class="feature"><div class="icon">◉</div><h3>Live departures</h3><p>Planned next: scheduled and estimated times clearly separated, with freshness indicators.</p></article>
+<article class="feature"><div class="icon">◉</div><h3>Live departure lookup</h3><p>Experimental connection to the official Irish Rail real-time service, with clear fallback if unavailable.</p></article>
 <article class="feature"><div class="icon">⌖</div><h3>Nearest station</h3><p>Planned next: optional location access and directions to the station.</p></article>
 <article class="feature"><div class="icon">♧</div><h3>Journey alerts</h3><p>Planned: useful reminders and verified service disruption notifications.</p></article>
 <article class="feature"><div class="icon">↗</div><h3>Journey planning</h3><p>Planned: clear route steps, transfers, walking connections and alternatives when data supports them.</p></article>
@@ -76,9 +76,45 @@ function renderStations(){
   const row=document.createElement("div");row.className="station";
   const info=document.createElement("div");const title=document.createElement("div");title.className="station-name";title.textContent=name;const type=document.createElement("div");type.className="station-type";type.textContent="DART corridor · directory entry";info.append(title,type);
   const actions=document.createElement("div");actions.className="station-actions";
+  const departures=document.createElement("button");departures.type="button";departures.className="smallbtn";departures.textContent="Departures";departures.setAttribute("aria-label","Look up departures for "+name);departures.addEventListener("click",()=>loadDepartures(name,row));
   const save=document.createElement("button");save.type="button";save.className="smallbtn"+(saved.includes(name)?" saved":"");save.textContent=saved.includes(name)?"♥ Saved":"♡ Save";save.setAttribute("aria-label",(saved.includes(name)?"Remove ":"Save ")+name+(saved.includes(name)?" from favourites":" to favourites"));
   save.addEventListener("click",()=>{const current=getSaved();setSaved(current.includes(name)?current.filter(x=>x!==name):[...current,name]);renderStations();renderFavorites()});
-  actions.append(save);row.append(info,actions);results.append(row);
+  actions.append(departures,save);row.append(info,actions);results.append(row);
+ });
+}
+function loadDepartures(stationName,row){
+ const old=row.querySelector(".departure-panel");
+ if(old){old.remove();return}
+ const panel=document.createElement("div");panel.className="departure-panel";panel.style.cssText="grid-column:1/-1;border-top:1px solid var(--line);margin-top:10px;padding-top:12px;color:var(--muted);font-size:13px";panel.setAttribute("aria-live","polite");panel.textContent="Connecting to Irish Rail real-time information…";row.append(panel);
+ const url="https://api.irishrail.ie/realtime/realtime.asmx/getStationDataByNameXML?StationDesc="+encodeURIComponent(stationName)+"&NumMins=90";
+ const timeout=new Promise((_,reject)=>setTimeout(()=>reject(new Error("Request timed out")),9000));
+ Promise.race([fetch(url,{headers:{Accept:"application/xml, text/xml"}}),timeout]).then(async response=>{
+   if(!response.ok)throw new Error("Service returned "+response.status);
+   const xmlText=await response.text();
+   const xml=new DOMParser().parseFromString(xmlText,"application/xml");
+   if(xml.querySelector("parsererror"))throw new Error("Could not read the response");
+   const nodes=Array.from(xml.getElementsByTagNameNS("*","objStationData"));
+   if(!nodes.length)throw new Error("No departure records returned");
+   const field=(node,name)=>{const el=node.getElementsByTagNameNS("*",name)[0];return el?el.textContent.trim():""};
+   panel.replaceChildren();
+   const heading=document.createElement("div");heading.style.cssText="font-weight:800;color:var(--text);margin-bottom:5px";heading.textContent="Irish Rail departures · "+stationName;panel.append(heading);
+   const stamp=document.createElement("div");stamp.style.cssText="font-size:11px;margin-bottom:10px";stamp.textContent="Retrieved "+new Date().toLocaleTimeString()+" · official feed data may be incomplete or delayed";panel.append(stamp);
+   nodes.slice(0,8).forEach(node=>{
+     const line=document.createElement("div");line.style.cssText="display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid #ffffff12";
+     const left=document.createElement("div");const dest=document.createElement("div");dest.style.cssText="color:var(--text);font-weight:700";dest.textContent=field(node,"Destination")||"Destination unavailable";
+     const meta=document.createElement("div");meta.style.cssText="font-size:11px";meta.textContent=[field(node,"Origin"),field(node,"Status"),field(node,"Lastlocation")].filter(Boolean).join(" · ");left.append(dest,meta);
+     const right=document.createElement("div");right.style.cssText="text-align:right;white-space:nowrap";const due=field(node,"Duein");const expected=field(node,"Exparrival");const scheduled=field(node,"Scharrival");const expDepart=field(node,"Expdepart");const schDepart=field(node,"Schdepart");const isOrigin=(field(node,"Locationtype")==="O");
+     const live=isOrigin?(expDepart&&expDepart!=="00:00"?expDepart:""):(expected&&expected!=="00:00"?expected:"");
+     const plan=isOrigin?(schDepart&&schDepart!=="00:00"?schDepart:""):(scheduled&&scheduled!=="00:00"?scheduled:"");
+     const main=document.createElement("div");main.style.cssText="color:var(--accent);font-weight:800";main.textContent=live||plan|| (due?due+" min":"Time unavailable");
+     const sub=document.createElement("div");sub.style.cssText="font-size:10px";sub.textContent=live?"Expected":plan?"Scheduled only":"";right.append(main,sub);line.append(left,right);panel.append(line);
+   });
+   const foot=document.createElement("div");foot.style.cssText="font-size:10px;margin-top:9px";foot.textContent="Source: Irish Rail. Times are estimates where indicated; verify important journeys with the operator.";panel.append(foot);
+ }).catch(()=>{
+   if(!panel.isConnected)return;
+   panel.replaceChildren();const message=document.createElement("p");message.textContent="Live data could not be loaded inside this browser. No times have been invented. Open the official Irish Rail service to check this station.";panel.append(message);
+   const link=document.createElement("a");link.href="https://www.irishrail.ie/";link.target="_blank";link.rel="noopener noreferrer";link.textContent="Check official Irish Rail information ↗";link.style.color="var(--accent)";panel.append(link);
+   const api=document.createElement("p");api.style.marginTop="8px";const apiLink=document.createElement("a");apiLink.href=url;apiLink.target="_blank";apiLink.rel="noopener noreferrer";apiLink.textContent="Try the direct real-time feed ↗";apiLink.style.color="var(--text)";api.append(apiLink);panel.append(api);
  });
 }
 function renderFavorites(){
