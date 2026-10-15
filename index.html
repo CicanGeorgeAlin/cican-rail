@@ -162,7 +162,7 @@ function renderStations(){
  const query=search.value.trim().toLocaleLowerCase(),saved=getSaved();
  const matches=stations.filter(name=>name.toLocaleLowerCase().includes(query)&&(!showSaved||saved.includes(name)));
  results.replaceChildren();count.textContent=matches.length+" "+(matches.length===1?"STATION":"STATIONS");
- if(!matches.length){results.append(makeEmpty(showSaved?(query?"No saved stations match your search.":"No saved stops yet. Save a station with the heart button."):"No stations found. Try another search.");return}
+ if(!matches.length){results.append(makeEmpty(showSaved?(query?"No saved stations match your search.":"No saved stops yet. Save a station with the heart button."):"No stations found. Try another search."));return}
  matches.forEach(name=>{
   const card=document.createElement("article");card.className="station";
   const symbol=document.createElement("span");symbol.className="station-symbol";symbol.innerHTML=trainIcon;
