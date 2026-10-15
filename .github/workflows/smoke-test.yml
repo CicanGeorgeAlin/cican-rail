@@ -37,3 +37,9 @@ jobs:
           node --check /tmp/cican-rail-inline.js
           node --check api-config.js
           node --input-type=module --check < worker/irish-rail-proxy.js
+      - name: Install browser-test dependencies
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Test website controls and links in Chromium
+        run: node tests/browser_smoke.mjs
