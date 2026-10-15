@@ -17,7 +17,7 @@ class RailAppSmokeTests(unittest.TestCase):
         self.assertIn("Your next train,", HTML)
         self.assertIn("--teal:#00843d", HTML)
         self.assertIn("--lime:#f4d35e", HTML)
-        self.assertIn("FREE · IRELAND", HTML)
+        self.assertIn("FREE CORE TOOLS", HTML)
         self.assertIn("Free core tools", HTML)
         self.assertNotIn("A calmer way to commute", HTML)
         self.assertNotIn("Your local network", HTML)
