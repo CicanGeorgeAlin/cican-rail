@@ -12,6 +12,12 @@ class RailAppSmokeTests(unittest.TestCase):
         self.assertIn("<title>CICAN RAIL", HTML)
         self.assertIn('name="theme-color" content="#f5f8f5"', HTML)
         self.assertIn('id="home"', HTML)
+        self.assertIn('id="journeySection"', HTML)
+        self.assertIn('id="heroNearMe"', HTML)
+        self.assertIn('id="heroDepartures"', HTML)
+        self.assertIn('id="heroJourney"', HTML)
+        self.assertIn('data-target="journeySection"', HTML)
+        self.assertIn('grid-template-columns:repeat(4,1fr)', HTML)
 
     def test_minimal_homepage_and_free_core_tools(self):
         self.assertIn("Your next train,", HTML)
