@@ -63,8 +63,8 @@ try {
   const search = page.locator("#stationSearch");
   await search.fill("Connolly");
   await page.getByRole("button", { name: "Save Connolly" }).click();
-  await page.getByRole("button", { name: "Saved", exact: true }).first().click();
-  await page.getByRole("button", { name: "All stations" }).click();
+  await page.locator("#savedFilter").click();
+  await page.locator("#allFilter").click();
   await page.locator("#clearSearch").click();
   await page.getByRole("button", { name: "Check departures for Connolly" }).click();
   await page.getByText("Live data could not be loaded in this browser. No times have been invented.").waitFor();
@@ -78,7 +78,7 @@ try {
   await page.getByRole("button", { name: "Clear station search" }).click();
   await page.getByRole("button", { name: "Saved", exact: true }).last().click();
   await page.getByRole("button", { name: "Find", exact: true }).first().click();
-  await page.getByRole("button", { name: "Save Connolly" }).click();
+  await page.getByRole("button", { name: "Remove Connolly" }).click();
 
   // Swap, form validation, valid route submission and all quick-route buttons.
   await page.locator("#fromStation").fill("Connolly");
@@ -99,7 +99,7 @@ try {
     ["Home", "Your next train,"],
     ["Journey", "Plan a journey"],
     ["Stations", "Find a station"],
-    ["Saved", "Saved stations"]
+    ["Saved", "Saved"]
   ]) {
     await page.getByRole("button", { name, exact: true }).last().click();
     await page.getByRole("heading", { name: new RegExp(heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")) }).waitFor();
