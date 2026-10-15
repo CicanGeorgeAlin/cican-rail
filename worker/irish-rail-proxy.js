@@ -8,7 +8,7 @@ const ALLOWED_ORIGINS = new Set([
   "http://localhost:8000",
   "http://127.0.0.1:8000"
 ]);
-const OPERATIONS = new Set(["getAllStationsXML", "getStationDataByNameXML"]);
+const OPERATIONS = new Set(["getAllStationsXML", "getStationDataByNameXML_withNumMins"]);
 
 function corsHeaders(origin) {
   return {
@@ -53,7 +53,7 @@ export default {
 
     const upstream = new URL(UPSTREAM + "/" + operation);
     let ttl = 0;
-    if (operation === "getStationDataByNameXML") {
+    if (operation === "getStationDataByNameXML_withNumMins") {
       const station = (url.searchParams.get("StationDesc") || "").trim();
       const minutesRaw = url.searchParams.get("NumMins") || "90";
       const minutes = Number(minutesRaw);
