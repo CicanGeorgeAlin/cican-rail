@@ -59,6 +59,11 @@ class RailAppSmokeTests(unittest.TestCase):
         self.assertIn("Duein", HTML)
         self.assertIn("Estimated and scheduled times are not guarantees", HTML)
 
+    def test_empty_departure_feed_is_not_reported_as_a_generic_failure(self):
+        self.assertIn("No train records were returned for this station.", HTML)
+        self.assertIn("The feed may have no services listed in this window", HTML)
+        self.assertIn("Check official Irish Rail information ↗", HTML)
+
     def test_departure_request_is_aborted_after_timeout_and_timer_is_cleared(self):
         self.assertIn("const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),9000)", HTML)
         self.assertIn("fetch(url,{signal:controller.signal,headers:{Accept:\"application/xml, text/xml\"}})", HTML)
