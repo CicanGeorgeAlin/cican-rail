@@ -72,6 +72,8 @@ try {
   await page.getByText("Live data could not be loaded in this browser. No times have been invented.").waitFor();
   await page.getByRole("button", { name: "Try again" }).click();
   await page.getByText("Irish Rail information · Connolly").waitFor();
+  await page.getByRole("button", { name: "Refresh departures for Connolly" }).click();
+  await page.getByText("Irish Rail information · Connolly").waitFor();
 
   // Test the second dynamically generated station-time button and saved-stop actions.
   await search.fill("Pearse");
