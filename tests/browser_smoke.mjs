@@ -102,7 +102,7 @@ try {
     ["Saved", "Saved"]
   ]) {
     await page.getByRole("button", { name, exact: true }).last().click();
-    await page.getByRole("heading", { name: new RegExp(heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")) }).waitFor();
+    await page.getByRole("heading", { name: new RegExp(heading) }).waitFor();
   }
 
   console.log("Browser smoke test passed: anchors, hero actions, navigation, geolocation, search, filters, clear, save/remove/find, departures/retry, swap, validation, submit, and all quick routes.");
