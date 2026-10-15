@@ -29,7 +29,7 @@ try {
     if (url.pathname.endsWith("/getAllStationsXML")) {
       return route.fulfill({ status: 200, contentType: "application/xml", body: stationXml });
     }
-    if (url.pathname.endsWith("/getStationDataByNameXML")) {
+    if (url.pathname.endsWith("/getStationDataByNameXML_withNumMins")) {
       if (url.searchParams.get("StationDesc") === "Connolly" && ++connollyRequests === 1) {
         return route.fulfill({ status: 502, contentType: "text/plain", body: "simulated upstream failure" });
       }
