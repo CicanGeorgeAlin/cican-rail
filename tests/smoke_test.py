@@ -76,6 +76,10 @@ class RailAppSmokeTests(unittest.TestCase):
         self.assertIn('retry.textContent="Try again"', HTML)
         self.assertIn('retry.addEventListener("click",()=>{panel.remove();loadDepartures(stationName,card)})', HTML)
         self.assertIn("Duein", HTML)
+        self.assertIn("item.localName||item.nodeName", HTML)
+        self.assertIn("toLocaleLowerCase()===wanted", HTML)
+        self.assertIn("Expdepart", HTML)
+        self.assertIn("Locationtype", HTML)
         self.assertIn("Estimated and scheduled times are not guarantees", HTML)
 
     def test_empty_departure_feed_is_not_reported_as_a_generic_failure(self):
