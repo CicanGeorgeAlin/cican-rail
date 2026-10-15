@@ -59,6 +59,11 @@ class RailAppSmokeTests(unittest.TestCase):
         self.assertIn("Duein", HTML)
         self.assertIn("Estimated and scheduled times are not guarantees", HTML)
 
+    def test_departure_request_is_aborted_after_timeout_and_timer_is_cleared(self):
+        self.assertIn("const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),9000)", HTML)
+        self.assertIn("fetch(url,{signal:controller.signal,headers:{Accept:\"application/xml, text/xml\"}})", HTML)
+        self.assertIn(".finally(()=>clearTimeout(timeout))", HTML)
+
     def test_official_operator_links_and_independence_disclosure_exist(self):
         self.assertIn("https://www.irishrail.ie/", HTML)
         self.assertIn("https://www.transportforireland.ie/available-apps/tfi-live/", HTML)
