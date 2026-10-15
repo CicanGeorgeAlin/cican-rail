@@ -2,7 +2,7 @@
 
 This small Cloudflare Worker safely proxies only the two official Irish Rail XML endpoints currently used by CICAN RAIL:
 - `getAllStationsXML` — station directory and coordinates (cached for up to 1 hour)
-- `getStationDataByNameXML` — station departure/arrival records (cached for up to 8 seconds)
+- `getStationDataByNameXML_withNumMins` — station departure/arrival records (cached for up to 8 seconds)
 
 It does not invent train times and does not provide a full journey planner. The upstream service remains the source of truth.
 
@@ -15,7 +15,7 @@ It does not invent train times and does not provide a full journey planner. The 
 5. Commit and push. GitHub Pages will redeploy CICAN RAIL.
 6. Test the Worker root (it should return a JSON 404 because only explicit API operations are allowed), then test:
    - `<worker-url>/getAllStationsXML`
-   - `<worker-url>/getStationDataByNameXML?StationDesc=Connolly&NumMins=90`
+   - `<worker-url>/getStationDataByNameXML_withNumMins?StationDesc=Connolly&NumMins=90`
 7. Open the live site and test the station directory and a station's **Times** button.
 
 The Worker allows the published GitHub Pages origin and local port 8000 for development. If you change the published domain, update `ALLOWED_ORIGINS` in `irish-rail-proxy.js`.
