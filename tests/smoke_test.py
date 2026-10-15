@@ -51,6 +51,7 @@ class RailAppSmokeTests(unittest.TestCase):
         self.assertIn("navigator.geolocation.getCurrentPosition", HTML)
         self.assertIn("Your location stays on this device", HTML)
         self.assertIn("Nearby stations are unavailable because station coordinates could not be loaded.", HTML)
+        self.assertIn("Nearby stations are unavailable. Search by station name instead.", HTML)
         self.assertIn('stationDirectoryStatus="loading"', HTML)
         self.assertIn('stationDirectoryStatus="fallback"', HTML)
 
@@ -68,6 +69,7 @@ class RailAppSmokeTests(unittest.TestCase):
         self.assertIn("not yet a complete station-to-station timetable", HTML)
         self.assertNotIn('window.open(url,"_blank","noopener,noreferrer")', HTML)
         self.assertIn('data-route="Connolly|Howth"', HTML)
+        self.assertIn('document.getElementById("journeyForm").requestSubmit()', HTML)
 
     def test_favourites_are_local_and_migrate_old_storage(self):
         self.assertIn("cicanrail.favourites.v1", HTML)
