@@ -37,7 +37,7 @@ class GtfsValidatorTests(unittest.TestCase):
     def test_accepts_calendar_dates_only_feed(self):
         files = dict(VALID_FILES)
         del files["calendar.txt"]
-        files["calendar_dates.txt"] = "service_id,date,exception_type\\nWKD,20261015,1\\n"
+        files["calendar_dates.txt"] = "service_id,date,exception_type\nWKD,20261015,1\n"
         with tempfile.TemporaryDirectory() as directory:
             report = validate_gtfs(self.make_zip(directory, files))
         self.assertEqual(report.errors, [])
