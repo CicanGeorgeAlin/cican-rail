@@ -23,7 +23,7 @@ jobs:
       - name: Run website smoke tests
         run: python -m unittest discover -s tests -p "*_test.py" -v
       - name: Verify official Irish Rail API returns live station and train data
-        run: python tests/live_api_test.py
+        run: python tests/live_api_check.py
       - name: Check inline JavaScript syntax
         shell: bash
         run: |
