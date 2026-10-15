@@ -11,6 +11,7 @@ try {
   await delay(800);
   browser = await chromium.launch({ headless: true });
   const context = await browser.newContext({
+    viewport: { width: 390, height: 844 },
     permissions: ["geolocation"],
     geolocation: { latitude: 53.3498, longitude: -6.2603 }
   });
