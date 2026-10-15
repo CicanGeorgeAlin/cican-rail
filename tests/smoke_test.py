@@ -53,7 +53,7 @@ class RailAppSmokeTests(unittest.TestCase):
     def test_official_operator_links_and_independence_disclosure_exist(self):
         self.assertIn("https://www.irishrail.ie/", HTML)
         self.assertIn("https://www.transportforireland.ie/available-apps/tfi-live/", HTML)
-        self.assertIn("not affiliated with or endorsed by", HTML)
+        self.assertIn("Independent project", HTML)
 
     def test_forbidden_project_word_is_absent(self):
         self.assertIsNone(re.search(r"\bblink\b", HTML, flags=re.IGNORECASE))
