@@ -128,7 +128,7 @@ h1{margin-top:10px;font-size:clamp(34px,5vw,52px);line-height:1.03;letter-spacin
 <span class="network-pill"><span class="status-dot"></span> FREE CORE TOOLS</span>
 </header>
 <main>
-<section class="hero" id="home"><div><div class="eyebrow">DART · IRISH RAIL</div><h1>Your next train,<br>made simple.</h1><div class="hero-actions" aria-label="Quick actions"><button type="button" class="hero-action" id="heroNearMe"><span aria-hidden="true">◎</span> Near me</button><button type="button" class="hero-action" id="heroDepartures"><span aria-hidden="true">↗</span> Departures</button><button type="button" class="hero-action hero-action-primary" id="heroJourney"><span aria-hidden="true">⇄</span> Plan journey</button></div></div></section>
+<section class="hero" id="home"><div><div class="eyebrow">DART · IRISH RAIL</div><h1>Your next train,<br>made simple.</h1><div class="hero-actions" aria-label="Quick actions"><button type="button" class="hero-action" id="heroNearMe"><span aria-hidden="true">◎</span> Near me</button><button type="button" class="hero-action" id="heroDepartures" aria-label="Find departures"><span aria-hidden="true">↗</span> Departures</button><button type="button" class="hero-action hero-action-primary" id="heroJourney"><span aria-hidden="true">⇄</span> Plan journey</button></div></div></section>
 <section class="panel planner" id="journeySection" aria-labelledby="planner-title">
 <div class="section-heading"><div><h2 id="planner-title">Plan a journey</h2><p>Choose your start and destination. Full route and transfer results are still being built.</p></div></div>
 <div id="journeyResults" class="journey-results" aria-live="polite"></div>
@@ -142,15 +142,6 @@ h1{margin-top:10px;font-size:clamp(34px,5vw,52px);line-height:1.03;letter-spacin
 <datalist id="stationOptions"></datalist>
 </form><p id="plannerMessage" class="planner-message" aria-live="polite"></p>
 <div class="quicklinks" aria-label="Popular journeys"><button class="quicklink" data-route="Connolly|Howth" type="button">Connolly → Howth</button><button class="quicklink" data-route="Pearse|Bray" type="button">Pearse → Bray</button><button class="quicklink" data-route="Dún Laoghaire|Malahide" type="button">Dún Laoghaire → Malahide</button></div>
-</section>
-<section class="panel free-plan" aria-labelledby="free-plan-title">
-<div class="free-plan-head"><div><h2 id="free-plan-title">Powerful features. Free by design.</h2><p class="free-plan-intro">Passenger essentials should not sit behind a paywall. We will build original features using authorised data and keep the core experience free.</p></div><span class="free-badge">NO SUBSCRIPTION</span></div>
-<div class="free-grid">
-<article class="free-item"><span class="state">Available in prototype</span><strong>Station search & favourites</strong><p>Search stations and save your regular stops on this device, without an account.</p></article>
-<article class="free-item"><span class="state">Feed-dependent</span><strong>Nearby stations & departures</strong><p>Nearby results need station coordinates; departure times depend on the official feed working in your browser.</p></article>
-<article class="free-item"><span class="state">In development</span><strong>Real journey planning & transfers</strong><p>Build a native timetable engine with service calendars, changes and clear scheduled-versus-live labels.</p></article>
-<article class="free-item"><span class="state">Planned free essentials</span><strong>Alerts, offline access & more</strong><p>Explore disruption alerts, saved journeys, accessibility details and offline support where reliable data is available.</p></article>
-</div>
 </section>
 <div class="app-grid">
 <section id="stationsSection" aria-labelledby="stations-title">
