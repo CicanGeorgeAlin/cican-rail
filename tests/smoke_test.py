@@ -120,7 +120,7 @@ class RailAppSmokeTests(unittest.TestCase):
         self.assertIn('<script src="./api-config.js"></script>', HTML)
         self.assertIn('window.CICAN_RAIL_API_BASE = ""', (ROOT / "api-config.js").read_text(encoding="utf-8"))
         self.assertIn('window.CICAN_RAIL_API_BASE||"https://api.irishrail.ie/realtime/realtime.asmx"', HTML)
-        self.assertIn('IRISH_RAIL_API_BASE+"/getStationDataByNameXML?StationDesc="', HTML)
+        self.assertIn('IRISH_RAIL_API_BASE+"/getStationDataByNameXML_withNumMins?StationDesc="', HTML)
         self.assertIn('fetch(IRISH_RAIL_API_BASE+"/getAllStationsXML"', HTML)
 
     def test_primary_buttons_and_navigation_have_handlers(self):
