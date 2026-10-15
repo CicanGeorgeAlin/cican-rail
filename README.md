@@ -47,3 +47,19 @@ We will study public feature descriptions, user needs and publicly available rev
 
 ## Independence
 CICAN RAIL is not affiliated with or endorsed by Iarnród Éireann, the National Transport Authority, Google or any other transport operator. Names are used only to identify relevant services and sources.
+
+## GTFS schedule validation tool
+
+Before using a downloaded NTA GTFS Schedule ZIP for route calculations, run the structural validator:
+
+```bash
+python scripts/validate_gtfs.py /path/to/GTFS_All.zip
+```
+
+The validator checks for core schedule files, required columns, and references between routes, trips, stops, stop times and service calendars. It reports errors and a summary of rail-route coverage. The test suite includes a small synthetic feed:
+
+```bash
+python -m unittest discover -s tests -p "*_test.py" -v
+```
+
+**Important:** passing structural checks does not prove that a feed is current, contains all Irish Rail services, is matched to a particular GTFS-Realtime version, or is ready for production. Verify the feed date, rail coverage, licence, attribution and update process before implementing journey calculations. The validator does not download any data or contain API credentials.
