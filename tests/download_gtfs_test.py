@@ -13,8 +13,8 @@ from download_gtfs import download_and_validate  # noqa: E402
 
 
 VALID_FILES = {
-    "agency.txt": "agency_name,agency_url,agency_timezone\nIrish Rail,https://www.irishrail.ie,Europe/Dublin\n",
-    "routes.txt": "route_id,agency_id,route_type\nDART,IR,2\n",
+    "agency.txt": "agency_id,agency_name,agency_url,agency_timezone\nIR,Irish Rail,https://www.irishrail.ie,Europe/Dublin\n",
+    "routes.txt": "route_id,agency_id,route_short_name,route_type\nDART,IR,DART,2\n",
     "trips.txt": "route_id,service_id,trip_id\nDART,WKD,T1\n",
     "stops.txt": "stop_id,stop_name\nCONN,Connolly\nPEAR,Pearse\n",
     "stop_times.txt": "trip_id,arrival_time,departure_time,stop_id,stop_sequence\nT1,08:00:00,08:00:00,CONN,1\nT1,08:05:00,08:05:00,PEAR,2\n",
