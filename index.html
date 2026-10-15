@@ -7,15 +7,15 @@
 <meta name="description" content="A simple, app-style companion for Dublin DART and Irish rail journeys, station search, saved stops and departure information.">
 <meta name="author" content="George Alin Cican">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Trackline">
-<meta property="og:title" content="Trackline — Ireland rail companion">
+<meta property="og:site_name" content="CICAN RAIL">
+<meta property="og:title" content="CICAN RAIL — Ireland rail companion">
 <meta property="og:description" content="Find your station, check departures and keep your regular stops close.">
 <meta property="og:url" content="https://cicangeorgealin.github.io/cican-rail/">
 <meta name="twitter:card" content="summary">
 <link rel="canonical" href="https://cicangeorgealin.github.io/cican-rail/">
-<title>Trackline — Ireland rail companion</title>
+<title>CICAN RAIL — Ireland rail companion</title>
 <style>
-:root{color-scheme:light;--ink:#183b3a;--muted:#6b8280;--teal:#087f78;--teal-dark:#06635f;--mint:#d9f3e9;--lime:#d7f36b;--paper:#f5f7f2;--white:#fff;--line:#e0e9e3;--shadow:0 12px 35px rgba(25,68,57,.07);--width:1080px}
+:root{color-scheme:light;--ink:#17243b;--muted:#66758a;--teal:#2859d8;--teal-dark:#1d43a8;--mint:#e5ecff;--lime:#d9f36b;--paper:#f5f6fa;--white:#fff;--line:#e1e6ef;--shadow:0 12px 35px rgba(27,47,86,.08);--width:1080px}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:88px}
 body{min-height:100vh;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}
@@ -23,21 +23,21 @@ button,input,select{font:inherit}button,a{-webkit-tap-highlight-color:transparen
 .app{width:min(100%,var(--width));margin:auto;padding:0 24px 104px}
 .topbar{height:76px;display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line)}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:850;font-size:19px;letter-spacing:-.055em}
-.brand-mark{width:36px;height:36px;border-radius:12px;background:var(--teal);color:white;display:grid;place-items:center;box-shadow:0 5px 12px #087f7828}
+.brand-mark{width:36px;height:36px;border-radius:12px;background:var(--teal);color:white;display:grid;place-items:center;box-shadow:0 5px 12px #2859d828}
 .brand-mark svg{width:22px;height:22px}
-.network-pill{display:inline-flex;align-items:center;gap:7px;padding:9px 12px;background:#e7f3e9;border-radius:999px;color:#2c6860;font-size:10px;font-weight:850;letter-spacing:.09em}
-.status-dot{width:7px;height:7px;border-radius:50%;background:#42a77a}
+.network-pill{display:inline-flex;align-items:center;gap:7px;padding:9px 12px;background:#e8eeff;border-radius:999px;color:#3454a0;font-size:10px;font-weight:850;letter-spacing:.09em}
+.status-dot{width:7px;height:7px;border-radius:50%;background:#8aaa28}
 .hero{padding:35px 0 25px;display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,330px);gap:22px;align-items:center}
 .eyebrow{font-size:10px;color:var(--teal);font-weight:900;letter-spacing:.16em;text-transform:uppercase}
 h1{margin-top:10px;font-size:clamp(34px,5vw,52px);line-height:1.03;letter-spacing:-.065em;font-weight:850;max-width:560px}
 .hero-copy{margin-top:13px;max-width:470px;color:var(--muted);font-size:14px;line-height:1.65}
 .hero-art{position:relative;min-height:140px;border-radius:25px;overflow:hidden;background:var(--teal);padding:20px;color:#fff;isolation:isolate}
-.hero-art:before,.hero-art:after{content:"";position:absolute;border:1px solid #ffffff38;border-radius:50%;width:190px;height:190px;right:-18px;top:-80px;z-index:-1}
+.hero-art:before,.hero-art:after{content:"";position:absolute;border:1px solid #ffffff40;border-radius:50%;width:190px;height:190px;right:-18px;top:-80px;z-index:-1}
 .hero-art:after{width:130px;height:130px;right:10px;top:-50px}
-.art-caption{font-size:9px;font-weight:850;letter-spacing:.15em;color:#c5eee0;text-transform:uppercase}
+.art-caption{font-size:9px;font-weight:850;letter-spacing:.15em;color:#dbe4ff;text-transform:uppercase}
 .art-title{font-size:25px;line-height:1.1;letter-spacing:-.05em;font-weight:850;margin-top:10px}
 .route-art{position:absolute;bottom:16px;right:17px;display:flex;align-items:center;gap:5px}
-.route-art .track{width:90px;height:4px;border-radius:99px;background:#b9f2db}
+.route-art .track{width:90px;height:4px;border-radius:99px;background:#d9f36b}
 .route-art .node{width:10px;height:10px;border-radius:50%;border:2px solid white;background:var(--teal)}
 .panel{background:var(--white);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}
 .planner{padding:22px}
@@ -47,13 +47,13 @@ h1{margin-top:10px;font-size:clamp(34px,5vw,52px);line-height:1.03;letter-spacin
 .mode-tag{flex:none;background:#eff6e7;color:#4f7226;border-radius:8px;padding:7px 9px;font-size:9px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
 .route-fields{display:grid;grid-template-columns:minmax(0,1fr) 38px minmax(0,1fr) auto;gap:10px;align-items:end}
 .field label{display:block;margin:0 0 7px 2px;color:var(--muted);font-size:10px;font-weight:800}
-.field input{width:100%;height:48px;border:1px solid #dbe6df;border-radius:12px;background:#f9fbf8;color:var(--ink);padding:0 13px;outline:none;font-size:13px;min-width:0}
-.field input:focus,.station-search:focus{border-color:var(--teal);box-shadow:0 0 0 3px #087f7817}
+.field input{width:100%;height:48px;border:1px solid #dce3f0;border-radius:12px;background:#fbfcff;color:var(--ink);padding:0 13px;outline:none;font-size:13px;min-width:0}
+.field input:focus,.station-search:focus{border-color:var(--teal);box-shadow:0 0 0 3px #2859d817}
 .swap{width:38px;height:48px;border:1px solid var(--line);border-radius:12px;background:#f4f8f3;color:var(--teal);font-size:18px}
 .primary{min-height:48px;border:0;border-radius:12px;background:var(--teal);color:white;padding:0 18px;font-size:12px;font-weight:850;white-space:nowrap;transition:background .15s,transform .15s}
 .primary:hover{background:var(--teal-dark);transform:translateY(-1px)}
 .quicklinks{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.quicklink{border:1px solid #e2ebe3;border-radius:999px;background:#fbfcfa;color:#476461;padding:8px 11px;font-size:10px;font-weight:750}
+.quicklink{border:1px solid #e3e8f1;border-radius:999px;background:#ffffff;color:#52627a;padding:8px 11px;font-size:10px;font-weight:750}
 .quicklink:hover{border-color:var(--teal);color:var(--teal)}
 .app-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(250px,.8fr);gap:20px;margin-top:22px;align-items:start}
 .section-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 2px 12px}
@@ -61,37 +61,37 @@ h1{margin-top:10px;font-size:clamp(34px,5vw,52px);line-height:1.03;letter-spacin
 .section-top .subtle{font-size:10px;color:var(--muted)}
 .search-panel{padding:18px}
 .search-row{display:flex;gap:9px}
-.station-search{width:100%;min-width:0;height:44px;border:1px solid #dbe6df;border-radius:12px;background:#f9fbf8;padding:0 13px;color:var(--ink);font-size:12px;outline:none}
+.station-search{width:100%;min-width:0;height:44px;border:1px solid #dce3f0;border-radius:12px;background:#fbfcff;padding:0 13px;color:var(--ink);font-size:12px;outline:none}
 .clear{width:44px;flex:none;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--teal);font-size:18px}
 .filters{display:flex;gap:7px;margin:12px 0 14px}
 .filter{border:1px solid transparent;border-radius:999px;background:#f2f6f1;color:#607673;padding:8px 12px;font-size:10px;font-weight:800}
-.filter.active,.filter:hover{background:#dff4e9;color:#08746d;border-color:#c8e9db}
+.filter.active,.filter:hover{background:#e5ecff;color:#2859d8;border-color:#c8d5ff}
 .stations{display:grid;gap:8px}
-.station{display:grid;grid-template-columns:42px minmax(0,1fr) auto;gap:11px;align-items:center;padding:12px;border:1px solid #e7eee8;border-radius:15px;background:#fff;transition:border-color .15s,box-shadow .15s}
-.station:hover{border-color:#b9ded0;box-shadow:0 5px 16px #1e65510b}
-.station-symbol{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:#e5f5ed;color:var(--teal)}
+.station{display:grid;grid-template-columns:42px minmax(0,1fr) auto;gap:11px;align-items:center;padding:12px;border:1px solid #e8ebf3;border-radius:15px;background:#fff;transition:border-color .15s,box-shadow .15s}
+.station:hover{border-color:#c7d4ff;box-shadow:0 5px 16px #1e65510b}
+.station-symbol{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:#e8eeff;color:var(--teal)}
 .station-symbol svg{width:22px;height:22px}
 .station-name{font-size:12px;font-weight:850;line-height:1.35;overflow-wrap:anywhere}
 .station-type{margin-top:4px;color:var(--muted);font-size:10px}
 .station-actions{display:flex;align-items:center;gap:6px}
-.smallbtn{min-height:34px;padding:0 10px;border:1px solid #dce8df;border-radius:10px;background:#fff;color:var(--teal-dark);font-size:10px;font-weight:850;white-space:nowrap}
+.smallbtn{min-height:34px;padding:0 10px;border:1px solid #dce3f0;border-radius:10px;background:#fff;color:var(--teal-dark);font-size:10px;font-weight:850;white-space:nowrap}
 .smallbtn:hover{background:#e7f6ee;border-color:#b9e2cf}
-.savebtn{width:35px;height:35px;flex:none;border:1px solid #e0e9e3;border-radius:11px;background:#fff;color:#76918a;font-size:18px;line-height:1}
-.savebtn.saved{background:#e0f5e9;color:#087f78;border-color:#bce7d2}
+.savebtn{width:35px;height:35px;flex:none;border:1px solid #e1e6ef;border-radius:11px;background:#fff;color:#76918a;font-size:18px;line-height:1}
+.savebtn.saved{background:#e5ecff;color:#087f78;border-color:#c6d4ff}
 .empty{padding:27px 12px;text-align:center;color:var(--muted);font-size:12px;line-height:1.6}
 .departure-panel{grid-column:1/-1;padding:13px 3px 1px;border-top:1px solid var(--line);color:var(--muted);font-size:11px;line-height:1.6}
 .side-column{display:grid;gap:16px}
 .side-card{padding:19px}
-.saved-empty{margin-top:13px;padding:15px;border-radius:13px;background:#f5f8f3;color:var(--muted);font-size:11px;line-height:1.6}
+.saved-empty{margin-top:13px;padding:15px;border-radius:13px;background:#f5f7fc;color:var(--muted);font-size:11px;line-height:1.6}
 .favorites{display:grid;gap:8px;margin-top:12px}
-.fav-item{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px;border:1px solid #e5ece6;border-radius:12px}
+.fav-item{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px;border:1px solid #e4e9f1;border-radius:12px}
 .fav-item .station-name{font-size:11px}
 .fav-actions{display:flex;gap:5px;flex:none}
 .fav-actions button{min-height:30px;padding:0 8px;font-size:9px}
-.tip-card{background:#e2f4e8;border:1px solid #d1ecdc;border-radius:20px;padding:19px}
+.tip-card{background:#e9efff;border:1px solid #d4ddff;border-radius:20px;padding:19px}
 .tip-icon{width:34px;height:34px;border-radius:11px;background:#fff;display:grid;place-items:center;color:var(--teal);font-size:17px}
 .tip-card h3{margin-top:12px;font-size:15px;font-weight:850;letter-spacing:-.025em}
-.tip-card p{margin-top:7px;color:#54756d;font-size:11px;line-height:1.65}
+.tip-card p{margin-top:7px;color:#566784;font-size:11px;line-height:1.65}
 .tip-card a{display:inline-block;margin-top:12px;color:var(--teal-dark);font-size:10px;font-weight:850;text-underline-offset:3px}
 .notice{margin-top:18px;padding:13px 15px;border-radius:13px;background:#fff8e8;border:1px solid #f2e7c8;color:#816d42;font-size:10px;line-height:1.65}
 .notice strong{color:#675222}
@@ -100,7 +100,7 @@ h1{margin-top:10px;font-size:clamp(34px,5vw,52px);line-height:1.03;letter-spacin
 .bottom-nav{display:none}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media(max-width:760px){.app{padding:0 17px 100px}.hero{grid-template-columns:1fr;padding-top:29px}.hero-art{min-height:122px}.app-grid{grid-template-columns:1fr}.side-column{grid-template-columns:1fr 1fr}.route-fields{grid-template-columns:minmax(0,1fr) 38px minmax(0,1fr)}.route-fields .primary{grid-column:1/-1;width:100%}}
-@media(max-width:520px){.app{padding:0 12px 105px}.topbar{height:64px}.brand{font-size:17px}.network-pill{font-size:9px;padding:8px 9px}.hero{padding:26px 0 20px;gap:16px}h1{font-size:38px}.hero-copy{font-size:12px}.hero-art{min-height:116px;padding:17px;border-radius:19px}.art-title{font-size:22px}.planner{padding:16px;border-radius:18px}.section-heading h2{font-size:16px}.route-fields{grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr);gap:7px}.field input{padding:0 9px;font-size:11px}.swap{width:34px}.route-fields .primary{grid-column:1/-1}.app-grid{margin-top:19px;gap:19px}.search-panel,.side-card{padding:14px;border-radius:17px}.station{grid-template-columns:36px minmax(0,1fr) auto;gap:8px;padding:10px}.station-symbol{width:36px;height:36px;border-radius:11px}.station-name{font-size:11px}.station-type{font-size:9px}.smallbtn{padding:0 8px;font-size:9px}.savebtn{width:31px;height:32px}.side-column{grid-template-columns:1fr}.bottom-nav{position:fixed;z-index:20;bottom:0;left:0;right:0;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:#ffffffed;backdrop-filter:blur(16px);border-top:1px solid #dfe9e1;box-shadow:0 -5px 20px #1d564a0b}.nav-item{display:grid;justify-items:center;gap:4px;padding:6px 3px;border:0;border-radius:12px;background:transparent;color:#7b9189;font-size:9px;font-weight:800}.nav-item span:first-child{font-size:18px;line-height:1}.nav-item.active{background:#e1f5e9;color:var(--teal-dark)}.footer{padding-bottom:10px}}
+@media(max-width:520px){.app{padding:0 12px 105px}.topbar{height:64px}.brand{font-size:17px}.network-pill{font-size:9px;padding:8px 9px}.hero{padding:26px 0 20px;gap:16px}h1{font-size:38px}.hero-copy{font-size:12px}.hero-art{min-height:116px;padding:17px;border-radius:19px}.art-title{font-size:22px}.planner{padding:16px;border-radius:18px}.section-heading h2{font-size:16px}.route-fields{grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr);gap:7px}.field input{padding:0 9px;font-size:11px}.swap{width:34px}.route-fields .primary{grid-column:1/-1}.app-grid{margin-top:19px;gap:19px}.search-panel,.side-card{padding:14px;border-radius:17px}.station{grid-template-columns:36px minmax(0,1fr) auto;gap:8px;padding:10px}.station-symbol{width:36px;height:36px;border-radius:11px}.station-name{font-size:11px}.station-type{font-size:9px}.smallbtn{padding:0 8px;font-size:9px}.savebtn{width:31px;height:32px}.side-column{grid-template-columns:1fr}.bottom-nav{position:fixed;z-index:20;bottom:0;left:0;right:0;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:#ffffffed;backdrop-filter:blur(16px);border-top:1px solid #e1e6ef;box-shadow:0 -5px 20px #1d564a0b}.nav-item{display:grid;justify-items:center;gap:4px;padding:6px 3px;border:0;border-radius:12px;background:transparent;color:#77849a;font-size:9px;font-weight:800}.nav-item span:first-child{font-size:18px;line-height:1}.nav-item.active{background:#e5ecff;color:var(--teal-dark)}.footer{padding-bottom:10px}}
 @media(max-width:360px){.station{grid-template-columns:34px minmax(0,1fr)}.station-actions{grid-column:2;justify-content:flex-start}.station-symbol{width:34px;height:34px}.station-actions .smallbtn{flex:1}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
 </style>
@@ -108,12 +108,12 @@ h1{margin-top:10px;font-size:clamp(34px,5vw,52px);line-height:1.03;letter-spacin
 <body>
 <div class="app">
 <header class="topbar">
-<a class="brand" href="./" aria-label="Trackline home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7 3h10a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3Z" stroke="currentColor" stroke-width="1.8"/><path d="M8 7h8M8 11h8M8 18l-2 3m10-3 2 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="15" r="1" fill="#d7f36b"/><circle cx="16" cy="15" r="1" fill="#d7f36b"/></svg></span>trackline</a>
-<span class="network-pill"><span class="status-dot"></span> IRELAND RAIL</span>
+<a class="brand" href="./" aria-label="CICAN RAIL home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7 3h10a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3Z" stroke="currentColor" stroke-width="1.8"/><path d="M8 7h8M8 11h8M8 18l-2 3m10-3 2 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="15" r="1" fill="#d7f36b"/><circle cx="16" cy="15" r="1" fill="#d7f36b"/></svg></span>CICAN RAIL</a>
+<span class="network-pill"><span class="status-dot"></span> CORE TOOLS ALWAYS FREE</span>
 </header>
 <main>
 <section class="hero" id="home">
-<div><div class="eyebrow">A calmer way to commute</div><h1>Make your next<br>journey feel easy.</h1><p class="hero-copy">Find a station, check available departure information, and keep the stops you use most right at hand.</p></div>
+<div><div class="eyebrow">A calmer way to commute</div><h1>Make your next<br>journey feel easy.</h1><p class="hero-copy">Find stations, plan journeys, and keep your regular stops close — without a premium tier or paywall for core tools.</p></div>
 <div class="hero-art" aria-label="Dublin rail network"><div class="art-caption">Your local network</div><div class="art-title">DART &<br>Irish Rail</div><div class="route-art" aria-hidden="true"><span class="node"></span><span class="track"></span><span class="node"></span><span class="track" style="width:35px"></span><span class="node"></span></div></div>
 </section>
 <section class="panel planner" aria-labelledby="planner-title">
@@ -145,12 +145,12 @@ h1{margin-top:10px;font-size:clamp(34px,5vw,52px);line-height:1.03;letter-spacin
 </div>
 <div class="notice"><strong>About live times:</strong> This is an independent project. The departure lookup is experimental; if a live feed is unavailable, the app will say so rather than make up a time.</div>
 </main>
-<footer class="footer">Made for everyday journeys · <span id="year"></span><br>Independent project, not affiliated with or endorsed by Iarnród Éireann or the National Transport Authority. <a href="https://www.transportforireland.ie/" target="_blank" rel="noopener noreferrer">Official transport information ↗</a></footer>
+<footer class="footer">Core journey tools are free for everyone · Made for everyday journeys · <span id="year"></span><br>Independent project, not affiliated with or endorsed by Iarnród Éireann or the National Transport Authority. <a href="https://www.transportforireland.ie/" target="_blank" rel="noopener noreferrer">Official transport information ↗</a></footer>
 </div>
 <nav class="bottom-nav" aria-label="Main navigation"><button class="nav-item active" data-target="home"><span>⌂</span><span>Home</span></button><button class="nav-item" data-target="stationsSection"><span>⌕</span><span>Stations</span></button><button class="nav-item" data-target="savedSection"><span>♡</span><span>Saved</span></button></nav>
 <script>
 const stations = ["Howth","Howth Junction & Donaghmede","Bayside","Sutton","Kilbarrack","Raheny","Harmonstown","Killester","Clontarf Road","Connolly","Tara Street","Pearse","Grand Canal Dock","Lansdowne Road","Sandymount","Sydney Parade","Booterstown","Blackrock","Seapoint","Salthill & Monkstown","Dún Laoghaire","Sandycove & Glasthule","Glenageary","Dalkey","Killiney","Shankill","Bray","Greystones","Malahide","Portmarnock","Clongriffin"].sort((a,b)=>a.localeCompare(b));
-const storageKey="trackline.favourites.v1";
+const storageKey="CICAN RAIL.favourites.v1";
 const search=document.getElementById("stationSearch"),results=document.getElementById("stationResults"),favorites=document.getElementById("favorites"),count=document.getElementById("stationCount"),allFilter=document.getElementById("allFilter"),savedFilter=document.getElementById("savedFilter");
 let showSaved=false;
 const trainIcon='<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="2.8" width="14" height="16" rx="4" stroke="currentColor" stroke-width="1.7"/><path d="M8 7h8M8 11h8M8 19l-2 2m10-2 2 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="8.5" cy="15" r="1" fill="currentColor"/><circle cx="15.5" cy="15" r="1" fill="currentColor"/></svg>';
