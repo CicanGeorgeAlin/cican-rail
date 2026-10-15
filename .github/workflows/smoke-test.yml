@@ -35,3 +35,5 @@ jobs:
           Path("/tmp/cican-rail-inline.js").write_text("\n".join(scripts), encoding="utf-8")
           PY
           node --check /tmp/cican-rail-inline.js
+          node --check api-config.js
+          node --input-type=module --check < worker/irish-rail-proxy.js
