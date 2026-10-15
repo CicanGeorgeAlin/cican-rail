@@ -9,8 +9,8 @@ HTML = (ROOT / "index.html").read_text(encoding="utf-8")
 class RailAppSmokeTests(unittest.TestCase):
     def test_document_has_mobile_viewport_and_app_title(self):
         self.assertIn('<meta name="viewport"', HTML)
-        self.assertIn("<title>Trackline", HTML)
-        self.assertIn('name="theme-color" content="#f5f7f2"', HTML)
+        self.assertIn("<title>CICAN RAIL", HTML)
+        self.assertIn('name="theme-color" content="#f5f6fa"', HTML)
 
     def test_station_search_and_results_exist(self):
         self.assertIn('id="stationSearch"', HTML)
@@ -25,7 +25,7 @@ class RailAppSmokeTests(unittest.TestCase):
         self.assertIn('data-route="Connolly|Howth"', HTML)
 
     def test_favourites_are_local_and_account_free(self):
-        self.assertIn("trackline.favourites.v1", HTML)
+        self.assertIn("cicanrail.favourites.v1", HTML)
         self.assertIn("function renderFavorites()", HTML)
         self.assertIn("localStorage", HTML)
 
