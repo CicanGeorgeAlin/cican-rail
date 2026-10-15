@@ -11,7 +11,8 @@ This is a source-code and automated-test audit, not a claim that every live data
 - Save and remove favourite stations in local browser storage; no account is required.
 - Request device location only after the person presses “Find stations near me”.
 - Sort nearby stations by distance when coordinates are available.
-- Request departure data for a selected station from the Irish Rail real-time endpoint.
+- Request departure data for a selected station from the official Irish Rail real-time XML endpoint.
+- Optional proxy configuration is wired into both live-data calls; a narrow Cloudflare Worker proxy and deployment instructions are committed, but the Worker is not yet deployed/configured.
 - Show a useful empty/error state and a retry action when departure data cannot be loaded.
 - Validate station names before the planner form accepts a route.
 - Journey form validates station names and displays an explicit prototype result; it no longer sends passengers to Google Maps. This is not yet a working route engine.
@@ -23,7 +24,7 @@ This is a source-code and automated-test audit, not a claim that every live data
 
 - Full station directory: depends on the official endpoint responding with parseable XML. The bundled list remains as a fallback.
 - Nearby station results: require valid coordinates from the station feed; location permission is optional.
-- Departure times: depend on browser network access, API availability, response shape and cross-origin policy. Automated static tests do not establish that this works in every browser or on every device.
+- Departure times: direct browser requests can fail due to cross-origin/network policy. The Worker proxy scaffold is not active until deployed and `api-config.js` points at its URL. Automated tests do not establish live API success.
 - GTFS download: depends on the official download endpoint and structural validation. The manifest records retrieval time and hash, but does not independently prove freshness or complete railway coverage.
 - The displayed departure rows are a feed view, not a proof that each train reaches the user's selected destination.
 
@@ -45,7 +46,7 @@ The target is to provide passenger essentials without a subscription: station se
 ## Current engineering gate
 
 1. Keep the automated test suite green.
-2. Verify the official station feed and departures from a real mobile browser, recording the actual outcome.
+2. Deploy `worker/irish-rail-proxy.js` using `worker/README.md`, set the Worker URL in `api-config.js`, then verify the station feed and departures from a real mobile browser.
 3. Download a current NTA static GTFS feed using `python scripts/download_gtfs.py`; review the manifest and verify DART/Irish Rail coverage, licence and attribution.
 4. Implement and test a route engine against real schedule data before replacing the current honest planner explanation.
 5. Integrate real-time data only after authentication, schema/version, rate limits, cache policy and secret handling are confirmed.
