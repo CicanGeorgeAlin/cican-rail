@@ -26,6 +26,8 @@ class RailAppSmokeTests(unittest.TestCase):
 
     def test_favourites_are_local_and_account_free(self):
         self.assertIn("cicanrail.favourites.v1", HTML)
+        self.assertIn("CORE TOOLS ALWAYS FREE", HTML)
+        self.assertIn("trackline.favourites.v1", HTML)
         self.assertIn("function renderFavorites()", HTML)
         self.assertIn("localStorage", HTML)
 
