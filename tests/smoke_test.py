@@ -83,13 +83,19 @@ class RailAppSmokeTests(unittest.TestCase):
         self.assertIn("api.irishrail.ie/realtime/realtime.asmx", HTML)
         self.assertIn("No times have been invented", HTML)
         self.assertIn('retry.textContent="Try again"', HTML)
-        self.assertIn('retry.addEventListener("click",()=>{panel.remove();loadDepartures(stationName,card)})', HTML)
+        self.assertIn('retry.addEventListener("click",()=>{clearTimeout(panel.refreshTimer);panel.remove();loadDepartures(stationName,card)})', HTML)
         self.assertIn("Duein", HTML)
         self.assertIn("item.localName||item.nodeName", HTML)
         self.assertIn("toLocaleLowerCase()===wanted", HTML)
         self.assertIn("Expdepart", HTML)
         self.assertIn("Locationtype", HTML)
         self.assertIn("Estimated and scheduled times are not guarantees", HTML)
+
+    def test_open_departure_panels_refresh_automatically_and_on_demand(self):
+        self.assertIn("panel.refreshTimer=setTimeout(", HTML)
+        self.assertIn("},30000)", HTML)
+        self.assertIn('refresh.textContent="Refresh now"', HTML)
+        self.assertIn('refresh.setAttribute("aria-label","Refresh departures for "+stationName)', HTML)
 
     def test_empty_departure_feed_is_not_reported_as_a_generic_failure(self):
         self.assertIn("No train records were returned for this station.", HTML)
