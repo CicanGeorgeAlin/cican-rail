@@ -95,12 +95,28 @@ h1{margin-top:10px;font-size:clamp(34px,5vw,52px);line-height:1.03;letter-spacin
 .tip-card a{display:inline-block;margin-top:12px;color:var(--teal-dark);font-size:10px;font-weight:850;text-underline-offset:3px}
 .notice{margin-top:13px;padding:9px 2px;color:var(--muted);font-size:10px;line-height:1.5;border:0;background:transparent}
 .notice strong{color:#675222}
+.free-plan{margin-top:20px;padding:19px}
+.free-plan-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.free-plan h2{font-size:18px;font-weight:850;letter-spacing:-.035em}
+.free-plan-intro{margin-top:5px;color:var(--muted);font-size:11px;line-height:1.6}
+.free-badge{flex:none;border-radius:999px;background:#e4f4e9;color:#006b32;padding:7px 10px;font-size:9px;font-weight:900;letter-spacing:.06em}
+.free-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:15px}
+.free-item{padding:13px;border:1px solid var(--line);border-radius:13px;background:#fbfdfb}
+.free-item strong{display:block;font-size:11px;line-height:1.4}
+.free-item p{margin-top:5px;color:var(--muted);font-size:10px;line-height:1.55}
+.free-item .state{display:inline-block;margin-bottom:7px;color:var(--teal-dark);font-size:8px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.support-card{padding:17px;border:1px solid #f0e2a8;border-radius:18px;background:#fff8df}
+.support-card h3{font-size:15px;font-weight:850;letter-spacing:-.025em}
+.support-card p{margin-top:7px;color:#566784;font-size:11px;line-height:1.65}
+.support-link{display:inline-flex;align-items:center;justify-content:center;gap:7px;margin-top:12px;min-height:42px;padding:0 14px;border-radius:11px;background:var(--teal);color:white;font-size:11px;font-weight:850;text-decoration:none}
+.support-link:hover{background:var(--teal-dark)}
+.support-note{display:block;margin-top:8px;color:#6c735f;font-size:9px;line-height:1.5}
 .footer{padding:18px 0 4px;text-align:center;color:#8ca09a;font-size:10px;line-height:1.7}
 .footer a{color:var(--teal-dark);font-weight:750}
 .planner-message{min-height:0;margin-top:0;color:#a14d28;font-size:11px}.planner-message:not(:empty){margin-top:10px}.journey-results{display:none;margin-top:14px;padding:14px;border:1px solid #dfe8e1;border-radius:14px;background:#fbfdfb}.journey-results.visible{display:block}.journey-results h3{font-size:13px;color:var(--ink);font-weight:850}.journey-results .journey-note{margin-top:6px;color:var(--muted);font-size:10px;line-height:1.6}.journey-results .map-link{display:inline-flex;align-items:center;gap:6px;margin-top:11px;padding:10px 12px;border-radius:10px;background:var(--teal);color:#fff;font-size:11px;font-weight:850;text-decoration:none}.journey-results .map-link:hover{background:var(--teal-dark)}.official-link{display:inline-block;margin-top:14px;color:var(--teal-dark);font-size:11px;font-weight:850;text-decoration:none}.bottom-nav{display:none}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media(max-width:760px){.app{padding:0 17px 100px}.hero{padding-top:24px}.app-grid{grid-template-columns:1fr}.side-column{grid-template-columns:1fr 1fr}.route-fields{grid-template-columns:minmax(0,1fr) 38px minmax(0,1fr)}.route-fields .primary{grid-column:1/-1;width:100%}}
-@media(max-width:520px){.app{padding:0 12px 105px}.topbar{height:64px}.brand{font-size:17px}.network-pill{font-size:9px;padding:8px 9px}.hero{padding:22px 0 16px}h1{font-size:34px}.planner{padding:16px;border-radius:18px}.section-heading h2{font-size:16px}.route-fields{grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr);gap:7px}.field input{padding:0 9px;font-size:11px}.swap{width:34px}.route-fields .primary{grid-column:1/-1}.app-grid{margin-top:19px;gap:19px}.search-panel,.side-card{padding:14px;border-radius:17px}.station{grid-template-columns:36px minmax(0,1fr) auto;gap:8px;padding:10px}.station-symbol{width:36px;height:36px;border-radius:11px}.station-name{font-size:11px}.station-type{font-size:9px}.smallbtn{padding:0 8px;font-size:9px}.savebtn{width:31px;height:32px}.side-column{grid-template-columns:1fr}.bottom-nav{position:fixed;z-index:20;bottom:0;left:0;right:0;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:#ffffffed;backdrop-filter:blur(16px);border-top:1px solid #e1e6ef;box-shadow:0 -5px 20px #1d564a0b}.nav-item{display:grid;justify-items:center;gap:4px;padding:6px 3px;border:0;border-radius:12px;background:transparent;color:#77849a;font-size:9px;font-weight:800}.nav-item span:first-child{font-size:18px;line-height:1}.nav-item.active{background:#e4f4e9;color:var(--teal-dark)}.footer{padding-bottom:10px}}
+@media(max-width:520px){.free-plan{padding:15px}.free-grid{grid-template-columns:1fr}.free-plan h2{font-size:16px}.app{padding:0 12px 105px}.topbar{height:64px}.brand{font-size:17px}.network-pill{font-size:9px;padding:8px 9px}.hero{padding:22px 0 16px}h1{font-size:34px}.planner{padding:16px;border-radius:18px}.section-heading h2{font-size:16px}.route-fields{grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr);gap:7px}.field input{padding:0 9px;font-size:11px}.swap{width:34px}.route-fields .primary{grid-column:1/-1}.app-grid{margin-top:19px;gap:19px}.search-panel,.side-card{padding:14px;border-radius:17px}.station{grid-template-columns:36px minmax(0,1fr) auto;gap:8px;padding:10px}.station-symbol{width:36px;height:36px;border-radius:11px}.station-name{font-size:11px}.station-type{font-size:9px}.smallbtn{padding:0 8px;font-size:9px}.savebtn{width:31px;height:32px}.side-column{grid-template-columns:1fr}.bottom-nav{position:fixed;z-index:20;bottom:0;left:0;right:0;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:#ffffffed;backdrop-filter:blur(16px);border-top:1px solid #e1e6ef;box-shadow:0 -5px 20px #1d564a0b}.nav-item{display:grid;justify-items:center;gap:4px;padding:6px 3px;border:0;border-radius:12px;background:transparent;color:#77849a;font-size:9px;font-weight:800}.nav-item span:first-child{font-size:18px;line-height:1}.nav-item.active{background:#e4f4e9;color:var(--teal-dark)}.footer{padding-bottom:10px}}
 @media(max-width:360px){.station{grid-template-columns:34px minmax(0,1fr)}.station-actions{grid-column:2;justify-content:flex-start}.station-symbol{width:34px;height:34px}.station-actions .smallbtn{flex:1}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
 </style>
@@ -109,7 +125,7 @@ h1{margin-top:10px;font-size:clamp(34px,5vw,52px);line-height:1.03;letter-spacin
 <div class="app">
 <header class="topbar">
 <a class="brand" href="./" aria-label="CICAN RAIL home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7 3h10a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3Z" stroke="currentColor" stroke-width="1.8"/><path d="M8 7h8M8 11h8M8 18l-2 3m10-3 2 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="15" r="1" fill="#f4d35e"/><circle cx="16" cy="15" r="1" fill="#d7f36b"/></svg></span>CICAN RAIL</a>
-<span class="network-pill"><span class="status-dot"></span> FREE · IRELAND</span>
+<span class="network-pill"><span class="status-dot"></span> FREE CORE TOOLS</span>
 </header>
 <main>
 <section class="hero" id="home"><div><div class="eyebrow">DART · IRISH RAIL</div><h1>Your next train,<br>made simple.</h1></div></section>
@@ -127,6 +143,15 @@ h1{margin-top:10px;font-size:clamp(34px,5vw,52px);line-height:1.03;letter-spacin
 </form><p id="plannerMessage" class="planner-message" aria-live="polite"></p>
 <div class="quicklinks" aria-label="Popular journeys"><button class="quicklink" data-route="Connolly|Howth" type="button">Connolly → Howth</button><button class="quicklink" data-route="Pearse|Bray" type="button">Pearse → Bray</button><button class="quicklink" data-route="Dún Laoghaire|Malahide" type="button">Dún Laoghaire → Malahide</button></div>
 </section>
+<section class="panel free-plan" aria-labelledby="free-plan-title">
+<div class="free-plan-head"><div><h2 id="free-plan-title">Powerful features. Free by design.</h2><p class="free-plan-intro">Passenger essentials should not sit behind a paywall. We will build original features using authorised data and keep the core experience free.</p></div><span class="free-badge">NO SUBSCRIPTION</span></div>
+<div class="free-grid">
+<article class="free-item"><span class="state">Available in prototype</span><strong>Station search & favourites</strong><p>Search stations and save your regular stops on this device, without an account.</p></article>
+<article class="free-item"><span class="state">Feed-dependent</span><strong>Nearby stations & departures</strong><p>Nearby results need station coordinates; departure times depend on the official feed working in your browser.</p></article>
+<article class="free-item"><span class="state">In development</span><strong>Real journey planning & transfers</strong><p>Build a native timetable engine with service calendars, changes and clear scheduled-versus-live labels.</p></article>
+<article class="free-item"><span class="state">Planned free essentials</span><strong>Alerts, offline access & more</strong><p>Explore disruption alerts, saved journeys, accessibility details and offline support where reliable data is available.</p></article>
+</div>
+</section>
 <div class="app-grid">
 <section id="stationsSection" aria-labelledby="stations-title">
 <div class="section-top"><h2 id="stations-title">Find a station</h2><span class="subtle" id="stationCount" aria-live="polite"></span></div>
@@ -138,11 +163,12 @@ h1{margin-top:10px;font-size:clamp(34px,5vw,52px);line-height:1.03;letter-spacin
 </section>
 <aside class="side-column">
 <section class="panel side-card" id="savedSection" aria-labelledby="saved-title"><div class="section-top"><h2 id="saved-title">Saved</h2><span class="subtle">ON THIS DEVICE</span></div><div class="favorites" id="favorites"></div><a class="official-link" href="https://www.irishrail.ie/" target="_blank" rel="noopener noreferrer">Official Irish Rail ↗</a></section>
+<section class="support-card" aria-labelledby="support-title"><h3 id="support-title">Support free rail tools ☕</h3><p>CICAN RAIL is free to use. If it helps you, or you simply believe in keeping useful passenger tools open to everyone, a voluntary coffee helps support the project.</p><a class="support-link" href="https://buymeacoffee.com/cican" target="_blank" rel="noopener noreferrer" aria-label="Support CICAN RAIL on Buy Me a Coffee">Buy Me a Coffee ↗</a><span class="support-note">Optional support only. No feature is unlocked by donating.</span></section>
 </aside>
 </div>
 <p class="notice">Times appear only when the official feed responds. Verify important journeys with the operator.</p>
 </main>
-<footer class="footer">Free core tools · Independent project · <span id="year"></span><br><a href="https://www.irishrail.ie/" target="_blank" rel="noopener noreferrer">Irish Rail</a> · <a href="https://www.transportforireland.ie/available-apps/tfi-live/" target="_blank" rel="noopener noreferrer">TFI Live</a></footer>
+<footer class="footer">Free core tools · Independent project · <span id="year"></span><br><a href="https://www.irishrail.ie/" target="_blank" rel="noopener noreferrer">Irish Rail</a> · <a href="https://www.transportforireland.ie/available-apps/tfi-live/" target="_blank" rel="noopener noreferrer">TFI Live</a> · <a href="https://buymeacoffee.com/cican" target="_blank" rel="noopener noreferrer">Support CICAN ☕</a></footer>
 </div>
 <nav class="bottom-nav" aria-label="Main navigation"><button class="nav-item active" data-target="home"><span>⌂</span><span>Home</span></button><button class="nav-item" data-target="stationsSection"><span>⌕</span><span>Stations</span></button><button class="nav-item" data-target="savedSection"><span>♡</span><span>Saved</span></button></nav>
 <script>
