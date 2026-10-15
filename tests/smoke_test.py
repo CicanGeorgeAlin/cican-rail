@@ -22,12 +22,14 @@ class CicanRailSmokeTests(unittest.TestCase):
         self.assertIn("localStorage", HTML)
 
     def test_departure_lookup_is_explicitly_experimental(self):
-        self.assertIn("function loadDepartures(stationName,row)", HTML)
+        self.assertIn("function loadDepartures(stationName,card)", HTML)
         self.assertIn("api.irishrail.ie/realtime/realtime.asmx", HTML)
         self.assertIn("No times have been invented", HTML)
+        self.assertIn("Live information", HTML)
 
     def test_support_link_and_project_disclosure_exist(self):
         self.assertIn("https://buymeacoffee.com/cican", HTML)
+        self.assertIn("Your railway, made simpler.", HTML)
         self.assertIn("not affiliated with or endorsed by", HTML)
 
     def test_forbidden_project_word_is_absent(self):
