@@ -54,7 +54,7 @@ try {
   // Hero actions and navigation targets.
   await page.getByRole("button", { name: /Plan journey/ }).first().click();
   await page.getByRole("heading", { name: "Plan a journey" }).waitFor();
-  await page.getByRole("button", { name: /departures/i }).click();
+  await page.locator("#heroDepartures").click();
   await page.getByRole("heading", { name: "Find a station" }).waitFor();
   await page.getByRole("button", { name: /Near me/ }).first().click();
   await page.getByText(/Showing the closest stations/).waitFor({ timeout: 3000 });
