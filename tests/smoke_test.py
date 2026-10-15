@@ -29,11 +29,9 @@ class RailAppSmokeTests(unittest.TestCase):
         self.assertNotIn("Your local network", HTML)
         self.assertNotIn("Trackline", HTML)
 
-    def test_free_by_design_roadmap_and_optional_donation_are_visible(self):
-        self.assertIn("Powerful features. Free by design.", HTML)
-        self.assertIn("Available in prototype", HTML)
-        self.assertIn("In development", HTML)
-        self.assertIn("Planned free essentials", HTML)
+    def test_simple_free_core_and_optional_donation_are_visible(self):
+        self.assertNotIn("Powerful features. Free by design.", HTML)
+        self.assertNotIn("Planned free essentials", HTML)
         self.assertIn('href="https://buymeacoffee.com/cican"', HTML)
         self.assertIn("No feature is unlocked by donating.", HTML)
         self.assertIn("FREE CORE TOOLS", HTML)
@@ -91,7 +89,8 @@ class RailAppSmokeTests(unittest.TestCase):
     def test_empty_departure_feed_is_not_reported_as_a_generic_failure(self):
         self.assertIn("No train records were returned for this station.", HTML)
         self.assertIn("The feed may have no services listed in this window", HTML)
-        self.assertIn("Check official Irish Rail information ↗", HTML)
+        self.assertNotIn("Check official Irish Rail information ↗", HTML)
+        self.assertIn("Try again in a moment. No times have been invented.", HTML)
 
     def test_departure_request_is_aborted_after_timeout_and_timer_is_cleared(self):
         self.assertIn("const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),9000)", HTML)
@@ -102,6 +101,9 @@ class RailAppSmokeTests(unittest.TestCase):
         self.assertIn("https://www.irishrail.ie/", HTML)
         self.assertIn("https://www.transportforireland.ie/available-apps/tfi-live/", HTML)
         self.assertIn("Independent project", HTML)
+        self.assertNotIn("Open official Irish Rail information ↗", HTML)
+        self.assertNotIn('class="official-link"', HTML)
+        self.assertIn('href="https://buymeacoffee.com/cican"', HTML)
 
     def test_forbidden_project_word_is_absent(self):
         self.assertIsNone(re.search(r"\bblink\b", HTML, flags=re.IGNORECASE))
