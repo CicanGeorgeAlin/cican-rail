@@ -83,7 +83,7 @@ def validate_gtfs(path: str | Path) -> FeedReport:
 
             for name in REQUIRED_COLUMNS:
                 try:
-                    files[name] = _read_csv(archive, archive_name(name))
+                    files[name] = _read_csv(archive, archive_name(name), REQUIRED_COLUMNS[name])
                 except (ValueError, UnicodeDecodeError) as exc:
                     errors.append(str(exc))
             calendar_columns = {
