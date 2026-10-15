@@ -29,7 +29,7 @@ class CicanRailSmokeTests(unittest.TestCase):
 
     def test_support_link_and_project_disclosure_exist(self):
         self.assertIn("https://buymeacoffee.com/cican", HTML)
-        self.assertIn("Your railway, made simpler.", HTML)
+        self.assertIn("Your next stop, made simpler.", HTML)
         self.assertIn("not affiliated with or endorsed by", HTML)
 
     def test_forbidden_project_word_is_absent(self):
