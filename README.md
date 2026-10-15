@@ -11,7 +11,8 @@ CICAN RAIL is an independent, free-first railway information project starting wi
 - Visible, optional Buy Me a Coffee support link; donations unlock no features.
 - Free-by-design feature roadmap that distinguishes prototype features from planned work.
 - Official Irish Rail station directory and an in-app request for station departure data (live browser/API access still requires real-device verification).
-- Journey search now stays in CICAN RAIL: it displays departures for the starting station when the official feed responds, and offers Google Maps as an optional external route fallback.
+- Journey form stays in CICAN RAIL, but currently checks departures from the starting station only; complete station-to-station routing and transfers are not implemented.
+- Departure errors and empty results stay in the app with a retry action; there are no operator-site redirects in the passenger flow.
 - Saved stations remain on the device; no account required.
 
 ## Not implemented yet
