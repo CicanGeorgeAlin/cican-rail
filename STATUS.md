@@ -14,7 +14,7 @@ This is a source-code and automated-test audit, not a claim that every live data
 - Request departure data for a selected station from the Irish Rail real-time endpoint.
 - Show a useful empty/error state and a retry action when departure data cannot be loaded.
 - Validate station names before the planner form accepts a route.
-- Offer an optional Google Maps transit route link; the website does not silently redirect users.
+- Journey form validates station names and displays an explicit prototype result; it no longer sends passengers to Google Maps. This is not yet a working route engine.
 - Voluntary Buy Me a Coffee support link. Donations do not unlock features.
 - Reproducible NTA GTFS download-and-validate script that records a local manifest only after structural checks pass.
 - Automated Python tests and inline JavaScript syntax checks run in GitHub Actions.
@@ -29,7 +29,7 @@ This is a source-code and automated-test audit, not a claim that every live data
 
 ## Not yet implemented / not verified
 
-- A native station-to-station timetable search with a verified journey itinerary.
+- A native station-to-station timetable search with a verified journey itinerary. The current form is only a validation/prototype screen and may show departures from the origin; it does not prove a train serves the selected destination.
 - Correct transfer search, interchange/walking times, service calendars and journey ranking.
 - Production-verified live departures, delay handling, cancellations, disruption alerts and data freshness monitoring.
 - NTA GTFS-Realtime integration with a registered key and the correct schema/version.
