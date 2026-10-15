@@ -42,6 +42,7 @@ class RailAppSmokeTests(unittest.TestCase):
         self.assertIn("trackline.favourites.v1", HTML)
         self.assertIn("function renderFavorites()", HTML)
         self.assertIn("localStorage", HTML)
+        self.assertIn('value.filter(x=>typeof x==="string")', HTML)
 
     def test_departures_use_official_feed_and_fail_honestly(self):
         self.assertIn("function loadDepartures(stationName,card)", HTML)
