@@ -181,7 +181,11 @@ function loadDepartures(stationName,card){
  fetch(url,{signal:controller.signal,headers:{Accept:"application/xml, text/xml"}}).then(async response=>{
   if(!response.ok)throw new Error("Service returned "+response.status);
   const xmlText=await response.text(),xml=new DOMParser().parseFromString(xmlText,"application/xml");if(xml.querySelector("parsererror"))throw new Error("Could not read response");
-  const nodes=Array.from(xml.getElementsByTagNameNS("*","objStationData"));if(!nodes.length)throw new Error("No departure records returned");
+  const nodes=Array.from(xml.getElementsByTagNameNS("*","objStationData"));
+  if(!nodes.length){
+   panel.replaceChildren();const empty=document.createElement("p");empty.textContent="No train records were returned for this station. The feed may have no services listed in this window, or it may be temporarily incomplete.";panel.append(empty);
+   const link=document.createElement("a");link.href="https://www.irishrail.ie/";link.target="_blank";link.rel="noopener noreferrer";link.textContent="Check official Irish Rail information ↗";link.style.cssText="display:inline-block;margin-top:8px;color:var(--teal-dark);font-weight:850";panel.append(link);return;
+  }
   const field=(node,name)=>{const el=node.getElementsByTagNameNS("*",name)[0];return el?el.textContent.trim():""};
   panel.replaceChildren();const heading=document.createElement("div");heading.style.cssText="font-weight:850;color:var(--ink);margin-bottom:5px";heading.textContent="Irish Rail information · "+stationName;panel.append(heading);
   const stamp=document.createElement("div");stamp.style.cssText="font-size:10px;margin-bottom:8px";stamp.textContent="Retrieved "+new Date().toLocaleTimeString()+" · verify important journeys";panel.append(stamp);
