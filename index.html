@@ -130,7 +130,7 @@ h1{margin-top:10px;font-size:clamp(34px,5vw,52px);line-height:1.03;letter-spacin
 <main>
 <section class="hero" id="home"><div><div class="eyebrow">DART · IRISH RAIL</div><h1>Your next train,<br>made simple.</h1><div class="hero-actions" aria-label="Quick actions"><button type="button" class="hero-action" id="heroNearMe"><span aria-hidden="true">◎</span> Near me</button><button type="button" class="hero-action" id="heroDepartures"><span aria-hidden="true">↗</span> Departures</button><button type="button" class="hero-action hero-action-primary" id="heroJourney"><span aria-hidden="true">⇄</span> Plan journey</button></div></div></section>
 <section class="panel planner" id="journeySection" aria-labelledby="planner-title">
-<div class="section-heading"><div><h2 id="planner-title">Plan a journey</h2><p>Select two stations. This prototype currently checks departures from the start station; full route and transfer results are still in development.</p></div></div>
+<div class="section-heading"><div><h2 id="planner-title">Plan a journey</h2><p>Choose your start and destination. Full route and transfer results are still being built.</p></div></div>
 <div id="journeyResults" class="journey-results" aria-live="polite"></div>
 <form id="journeyForm">
 <div class="route-fields">
@@ -162,11 +162,11 @@ h1{margin-top:10px;font-size:clamp(34px,5vw,52px);line-height:1.03;letter-spacin
 </div>
 </section>
 <aside class="side-column">
-<section class="panel side-card" id="savedSection" aria-labelledby="saved-title"><div class="section-top"><h2 id="saved-title">Saved</h2><span class="subtle">ON THIS DEVICE</span></div><div class="favorites" id="favorites"></div><a class="official-link" href="https://www.irishrail.ie/" target="_blank" rel="noopener noreferrer">Official Irish Rail ↗</a></section>
+<section class="panel side-card" id="savedSection" aria-labelledby="saved-title"><div class="section-top"><h2 id="saved-title">Saved</h2><span class="subtle">ON THIS DEVICE</span></div><div class="favorites" id="favorites"></div></section>
 <section class="support-card" aria-labelledby="support-title"><h3 id="support-title">Support free rail tools ☕</h3><p>CICAN RAIL is free to use. If it helps you, or you simply believe in keeping useful passenger tools open to everyone, a voluntary coffee helps support the project.</p><a class="support-link" href="https://buymeacoffee.com/cican" target="_blank" rel="noopener noreferrer" aria-label="Support CICAN RAIL on Buy Me a Coffee">Buy Me a Coffee ↗</a><span class="support-note">Optional support only. No feature is unlocked by donating.</span></section>
 </aside>
 </div>
-<p class="notice">Times appear only when the official feed responds. Verify important journeys with the operator.</p>
+<p class="notice">Free to use. Departure times appear only when the official feed responds; no times are invented.</p>
 </main>
 <footer class="footer">Free core tools · Independent project · <span id="year"></span><br><a href="https://www.irishrail.ie/" target="_blank" rel="noopener noreferrer">Irish Rail</a> · <a href="https://www.transportforireland.ie/available-apps/tfi-live/" target="_blank" rel="noopener noreferrer">TFI Live</a> · <a href="https://buymeacoffee.com/cican" target="_blank" rel="noopener noreferrer">Support CICAN ☕</a></footer>
 </div>
@@ -211,7 +211,7 @@ function loadDepartures(stationName,card){
   const nodes=Array.from(xml.getElementsByTagNameNS("*","objStationData"));
   if(!nodes.length){
    panel.replaceChildren();const empty=document.createElement("p");empty.textContent="No train records were returned for this station. The feed may have no services listed in this window, or it may be temporarily incomplete.";panel.append(empty);
-   const link=document.createElement("a");link.href="https://www.irishrail.ie/";link.target="_blank";link.rel="noopener noreferrer";link.textContent="Check official Irish Rail information ↗";link.style.cssText="display:inline-block;margin-top:8px;color:var(--teal-dark);font-weight:850";panel.append(link);const retry=document.createElement("button");retry.type="button";retry.textContent="Try again";retry.style.cssText="display:inline-block;margin:8px 0 0 10px;padding:7px 10px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--teal-dark);font-weight:850";retry.addEventListener("click",()=>{panel.remove();loadDepartures(stationName,card)});panel.append(retry);return;
+   const hint=document.createElement("p");hint.style.cssText="margin-top:7px;font-size:10px;color:var(--muted)";hint.textContent="Try again in a moment. No times have been invented.";panel.append(hint);const retry=document.createElement("button");retry.type="button";retry.textContent="Try again";retry.style.cssText="display:inline-block;margin:8px 0 0 10px;padding:7px 10px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--teal-dark);font-weight:850";retry.addEventListener("click",()=>{panel.remove();loadDepartures(stationName,card)});panel.append(retry);return;
   }
   const field=(node,name)=>{const wanted=name.toLocaleLowerCase();const el=Array.from(node.getElementsByTagName("*")).find(item=>(item.localName||item.nodeName).toLocaleLowerCase()===wanted);return el?el.textContent.trim():""};
   panel.replaceChildren();const heading=document.createElement("div");heading.style.cssText="font-weight:850;color:var(--ink);margin-bottom:5px";heading.textContent="Irish Rail information · "+stationName;panel.append(heading);
@@ -223,7 +223,7 @@ function loadDepartures(stationName,card){
    const time=document.createElement("div");time.style.cssText="color:var(--teal-dark);font-weight:900";time.textContent=live||plan||(due!==""&&Number.isFinite(Number(due))?"In "+due+" min":"Time unavailable");const sub=document.createElement("div");sub.style.cssText="font-size:9px;color:var(--muted)";sub.textContent=live?"Expected":plan?"Scheduled":(late!==""&&Number.isFinite(Number(late))&&Number(late)>0?late+" min late":"Live estimate");right.append(time,sub);line.append(left,right);panel.append(line);
   });
   const foot=document.createElement("div");foot.style.cssText="font-size:9px;margin-top:8px";foot.textContent="Source: Irish Rail. Estimated and scheduled times are not guarantees.";panel.append(foot);
- }).catch(()=>{if(!panel.isConnected)return;panel.replaceChildren();const message=document.createElement("p");message.textContent="Live data could not be loaded in this browser. No times have been invented.";panel.append(message);const link=document.createElement("a");link.href="https://www.irishrail.ie/";link.target="_blank";link.rel="noopener noreferrer";link.textContent="Open official Irish Rail information ↗";link.style.cssText="display:inline-block;margin-top:8px;color:var(--teal-dark);font-weight:850";panel.append(link);const retry=document.createElement("button");retry.type="button";retry.textContent="Try again";retry.style.cssText="display:inline-block;margin:8px 0 0 10px;padding:7px 10px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--teal-dark);font-weight:850";retry.addEventListener("click",()=>{panel.remove();loadDepartures(stationName,card)});panel.append(retry)}).finally(()=>clearTimeout(timeout));
+ }).catch(()=>{if(!panel.isConnected)return;panel.replaceChildren();const message=document.createElement("p");message.textContent="Live data could not be loaded in this browser. No times have been invented.";panel.append(message);const hint=document.createElement("p");hint.style.cssText="margin-top:7px;font-size:10px;color:var(--muted)";hint.textContent="Check your connection and retry here. No times have been invented.";panel.append(hint);const retry=document.createElement("button");retry.type="button";retry.textContent="Try again";retry.style.cssText="display:inline-block;margin:8px 0 0 10px;padding:7px 10px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--teal-dark);font-weight:850";retry.addEventListener("click",()=>{panel.remove();loadDepartures(stationName,card)});panel.append(retry)}).finally(()=>clearTimeout(timeout));
 }
 function renderFavorites(){
  const saved=getSaved();favorites.replaceChildren();
