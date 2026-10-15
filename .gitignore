@@ -1,0 +1,4 @@
+# Generated timetable downloads and local manifests
+/build/
+__pycache__/
+*.py[cod]
